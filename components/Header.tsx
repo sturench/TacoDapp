@@ -53,17 +53,17 @@ export default function Header() {
               >
                 <FaTwitter />
               </a>
-              <a
-                href={projectConfig.discordUrl}
-                aria-label={`${projectConfig.nftName} on Discord`}
-                rel="noopener noreferrer"
-                target="_blank"
-                data-tip="Discord"
-                data-for="header"
-                className="bg-gray-700 hover:bg-gray-600 rounded-full p-2"
-              >
-                <FaDiscord />
-              </a>
+              {/*<a*/}
+              {/*  href={projectConfig.discordUrl}*/}
+              {/*  aria-label={`${projectConfig.nftName} on Discord`}*/}
+              {/*  rel="noopener noreferrer"*/}
+              {/*  target="_blank"*/}
+              {/*  data-tip="Discord"*/}
+              {/*  data-for="header"*/}
+              {/*  className="bg-gray-700 hover:bg-gray-600 rounded-full p-2"*/}
+              {/*>*/}
+              {/*  <FaDiscord />*/}
+              {/*</a>*/}
               <ConnectButton />
 
             </div>

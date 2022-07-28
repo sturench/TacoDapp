@@ -1,34 +1,33 @@
 const projectConfig = {
-  nftName: 'Kovan NFT Faucet',
+  nftName: 'Mocko Taco',
 
-  nftSymbol: 'NCX',
+  nftSymbol: 'TACO',
 
-  maxSupply: 20000,
+  maxSupply: 4005,
 
-  maxMintAmountPerTxn: 5,
+  maxMintAmountPerTxn: 1,
 
   //  mintCost: process.env.NODE_ENV === 'production' ? 100 : 0.01,
 
-  networkName:'Kovan Testnet',
-    // process.env.NODE_ENV === 'production'
-    //   ? 'Ethereum Mainnet' // 'Ethereum Mainnet'
-    //   : 'Kovan Testnet', // 'Kovan Testnet'
+  networkName:
+    process.env.NODE_ENV === 'production'
+      ? 'Ethereum Mainnet' // 'Ethereum Mainnet'
+      : 'Kovan Testnet', // 'Kovan Testnet'
 
   chainName: 'ETH', // 'ETH'
 
-  chainId: 42, // Ethereum (1), Kovan (42)
-  // chainId: process.env.NODE_ENV === 'production' ? 1 : 42, // Ethereum (1), Kovan (42)
+  chainId: process.env.NODE_ENV === 'production' ? 1 : 42, // Ethereum (1), Kovan (42)
 
-  siteDomain: 'www.yourdomain.com',
+  siteDomain: 'www.mockotaco.com',
 
-  siteUrl: 'https://minting-da-pp.vercel.app/',
-    // process.env.NODE_ENV === 'production'
-    //   ? `https://your_site_domain`
-    //   : 'http://localhost:3000',
+  siteUrl:
+    process.env.NODE_ENV === 'production'
+      ? `https://your_site_domain`
+      : 'http://localhost:3000',
 
-  twitterUsername: '@ConsiderChaos',
+  twitterUsername: '@MockoTaco',
 
-  twitterUrl: 'https://twitter.com/VaultSwap_me',
+  twitterUrl: 'https://twitter.com/MockoTaco',
 
   discordUrl: 'https://discord.gg/jEJ3r9zDs9',
 

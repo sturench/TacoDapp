@@ -23,7 +23,7 @@ export default function Footer() {
       <Container>
         <div className="flex flex-col-reverse sm:flex-row justify-between items-center py-8">
           <div>
-            © {getCurrentYear()} VaultSwap, LLC
+            © {getCurrentYear()} Mocko Taco
           </div>
 
           <div className="flex items-center space-x-2 mb-4 sm:mb-0">
@@ -54,17 +54,17 @@ export default function Footer() {
             >
               <FaTwitter />
             </a>
-            <a
-              href={projectConfig.discordUrl}
-              aria-label={`${projectConfig.nftName} on Discord`}
-              rel="noopener noreferrer"
-              target="_blank"
-              data-tip="Discord"
-              data-for="footer"
-              className="bg-gray-700 hover:bg-gray-600 rounded-full p-2"
-            >
-              <FaDiscord />
-            </a>
+            {/*<a*/}
+            {/*  href={projectConfig.discordUrl}*/}
+            {/*  aria-label={`${projectConfig.nftName} on Discord`}*/}
+            {/*  rel="noopener noreferrer"*/}
+            {/*  target="_blank"*/}
+            {/*  data-tip="Discord"*/}
+            {/*  data-for="footer"*/}
+            {/*  className="bg-gray-700 hover:bg-gray-600 rounded-full p-2"*/}
+            {/*>*/}
+            {/*  <FaDiscord />*/}
+            {/*</a>*/}
           </div>
         </div>
       </Container>
