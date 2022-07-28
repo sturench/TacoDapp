@@ -57,7 +57,7 @@ export default function Minting(props:Props) {
                 );
                 console.debug("the contract");
                 console.debug(contract);
-                const transaction = await contract.publicSaleMint(mintAmount, {
+                const transaction = await contract.mintAllowlistTaco(mintAmount, {
                     value: totalWei,
                 });
 
@@ -131,7 +131,7 @@ export default function Minting(props:Props) {
                 web3Provider
             );
             console.debug('fetching supply');
-            setMaxSupply((await contract.maxMintSupply()).toString());
+            setMaxSupply(projectConfig.maxSupply.toString());
             setTotalSupply((await contract.totalSupply()).toString());
         }
 
@@ -144,50 +144,50 @@ export default function Minting(props:Props) {
         }
     }, [walletAddress, isConnected, chainId]);
 
-    useEffect(() => {
-        async function fetchMintPrice() {
-            if (!isConnected || chainId == 0 || walletAddress == "") {
-                console.debug("Not ready 1");
-                return;
-            }
-            if (walletAddress == null) {
-                console.debug("no account yet: " + walletAddress);
-                return;
-            }
-            console.debug('account: ' + walletAddress);
-            const web3Provider = new ethers.providers.JsonRpcProvider(
-                rpcConfig(process.env.NEXT_PUBLIC_INFURA_KEY)
-            );
-            const contract = new ethers.Contract(
-                ContractAddress,
-                ABI,
-                web3Provider
-            );
-            let partnerEligible;
-            // debugger;
-            if(typeof contract.isEligiblePartnerMint === 'function') {
-                partnerEligible = (await contract.isEligiblePartnerMint(walletAddress));
-            } else {
-                partnerEligible = false;
-            }
-            if (partnerEligible) {
-                const mintPrice = Number(ethers.utils.formatEther(await contract.partnerMintPrice()));
-                console.debug("Getting partner price " + mintPrice);
-                setMintPrice(mintPrice);
-                setPriceName("(Partner Price)");
-            } else {
-                const mintPrice = Number(ethers.utils.formatEther(await contract.mintPrice()));
-                console.debug('Getting standard price ' + mintPrice);
-                setMintPrice(mintPrice);
-                setPriceName("");
-            }
-
-        }
-
-        fetchMintPrice();
-        // cleanup
-        return () => setMintPrice(0);
-    }, [isConnected, walletAddress, chainId]);
+    // useEffect(() => {
+    //     async function fetchMintPrice() {
+    //         if (!isConnected || chainId == 0 || walletAddress == "") {
+    //             console.debug("Not ready 1");
+    //             return;
+    //         }
+    //         if (walletAddress == null) {
+    //             console.debug("no account yet: " + walletAddress);
+    //             return;
+    //         }
+    //         console.debug('account: ' + walletAddress);
+    //         const web3Provider = new ethers.providers.JsonRpcProvider(
+    //             rpcConfig(process.env.NEXT_PUBLIC_INFURA_KEY)
+    //         );
+    //         const contract = new ethers.Contract(
+    //             ContractAddress,
+    //             ABI,
+    //             web3Provider
+    //         );
+    //         let partnerEligible;
+    //         // debugger;
+    //         if(typeof contract.isEligiblePartnerMint === 'function') {
+    //             partnerEligible = (await contract.isEligiblePartnerMint(walletAddress));
+    //         } else {
+    //             partnerEligible = false;
+    //         }
+    //         if (partnerEligible) {
+    //             const mintPrice = Number(ethers.utils.formatEther(await contract.partnerMintPrice()));
+    //             console.debug("Getting partner price " + mintPrice);
+    //             setMintPrice(mintPrice);
+    //             setPriceName("(Partner Price)");
+    //         } else {
+    //             const mintPrice = Number(ethers.utils.formatEther(await contract.mintPrice()));
+    //             console.debug('Getting standard price ' + mintPrice);
+    //             setMintPrice(mintPrice);
+    //             setPriceName("");
+    //         }
+    //
+    //     }
+    //
+    //     fetchMintPrice();
+    //     // cleanup
+    //     return () => setMintPrice(0);
+    // }, [isConnected, walletAddress, chainId]);
 
     useEffect(() => {
         async function fetchMintStatus() {

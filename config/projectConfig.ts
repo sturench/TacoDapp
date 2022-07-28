@@ -12,11 +12,11 @@ const projectConfig = {
   networkName:
     process.env.NODE_ENV === 'production'
       ? 'Ethereum Mainnet' // 'Ethereum Mainnet'
-      : 'Kovan Testnet', // 'Kovan Testnet'
+      : 'Rinkeby Testnet', // 'Kovan Testnet'
 
   chainName: 'ETH', // 'ETH'
 
-  chainId: process.env.NODE_ENV === 'production' ? 1 : 42, // Ethereum (1), Kovan (42)
+  chainId: process.env.NODE_ENV === 'production' ? 1 : 4, // Ethereum (1), Kovan (42)
 
   siteDomain: 'www.mockotaco.com',
 
@@ -36,7 +36,7 @@ const projectConfig = {
       ? 'https://opensea.io/collection/your_opensea_collection_name'
       : 'https://testnets.opensea.io/collection/your_opensea_collection_name',
 
-  contractAddress:'0x55f6463854bf37f8B99B5409CA039137138d27F6',
+  contractAddress:'0x6Dd4F0cc3300681fA9A2AFE787Ed28df2Bfd1C3E',
     // process.env.NODE_ENV === 'production'
     //   ? 'your_mainnet_contract_address'
     //   : '0x55f6463854bf37f8B99B5409CA039137138d27F6',

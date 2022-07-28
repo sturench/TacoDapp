@@ -10,7 +10,8 @@ import Roadmap from '../components/Roadmap';
 import Team from '../components/Team';
 import projectConfig from '../config/projectConfig';
 import topImage from '../public/assets/facucet-header.png';
-import CLONEX_ABI from '../config/notclonexABI.json';
+// import CLONEX_ABI from '../config/notclonexABI.json';
+import MOCKOTACO_ABI from '../config/MockoTacoABI.json';
 // import COOLCATS_ABI from '../config/coolcatsABI.json';
 // import NOTDOODLES_ABI from '../config/notdoodlesABI.json';
 // import NOTMOONBIRDS_ABI from '../config/notmoonbirdsABI.json';
@@ -60,8 +61,8 @@ const Home: NextPage = () => {
 
             <div className="py-8">
                 <Prose>
-                    <Minting CollectionName={"Not CloneX"} TokenSymbol={'NCX'}
-                             ContractAddress={"0x55f6463854bf37f8B99B5409CA039137138d27F6"} ABI={CLONEX_ABI}
+                    <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}
+                             ContractAddress={"0x6Dd4F0cc3300681fA9A2AFE787Ed28df2Bfd1C3E"} ABI={MOCKOTACO_ABI}
                              CollectionImage={NCX_IMG}
                     />
                 </Prose>
