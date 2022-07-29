@@ -176,6 +176,19 @@
       {
         "indexed": false,
         "internalType": "bool",
+        "name": "allowlistSaleStatus",
+        "type": "bool"
+      }
+    ],
+    "name": "ToggleAllowlistSaleStatus",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bool",
         "name": "publicSaleStatus",
         "type": "bool"
       }
@@ -849,6 +862,13 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "toggleAllowlistSaleStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

@@ -36,7 +36,7 @@ const projectConfig = {
       ? 'https://opensea.io/collection/your_opensea_collection_name'
       : 'https://testnets.opensea.io/collection/your_opensea_collection_name',
 
-  contractAddress:'0x6Dd4F0cc3300681fA9A2AFE787Ed28df2Bfd1C3E',
+  contractAddress:'0x5c3ae745a6104e53248330c3281e47e7af772eee',
     // process.env.NODE_ENV === 'production'
     //   ? 'your_mainnet_contract_address'
     //   : '0x55f6463854bf37f8B99B5409CA039137138d27F6',

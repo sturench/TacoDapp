@@ -62,7 +62,7 @@ const Home: NextPage = () => {
             <div className="py-8">
                 <Prose>
                     <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}
-                             ContractAddress={"0x6Dd4F0cc3300681fA9A2AFE787Ed28df2Bfd1C3E"} ABI={MOCKOTACO_ABI}
+                             ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"} ABI={MOCKOTACO_ABI}
                              CollectionImage={NCX_IMG}
                     />
                 </Prose>
