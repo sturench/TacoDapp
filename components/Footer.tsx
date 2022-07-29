@@ -4,7 +4,7 @@ import {
   FaTwitter,
   FaDiscord,
   FaShip,
-  FaInfinity,
+  FaInfinity, FaEthereum,
 } from 'react-icons/fa';
 
 import Container from './Container';
@@ -43,6 +43,17 @@ export default function Footer() {
             >
               <FaHome />
             </NextLink>
+            <a
+                href={projectConfig.scanUrl}
+                aria-label={`${projectConfig.nftName} on Etherscan`}
+                rel="noopener noreferrer"
+                target="_blank"
+                data-tip="Etherscan"
+                data-for="header"
+                className="bg-gray-700 hover:bg-gray-600 rounded-full p-2"
+            >
+              <FaEthereum />
+            </a>
             <a
               href={projectConfig.twitterUrl}
               aria-label={`${projectConfig.nftName} on Twitter`}

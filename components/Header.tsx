@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { FaTwitter, FaDiscord, FaShip, FaInfinity } from 'react-icons/fa';
+import {FaTwitter, FaDiscord, FaShip, FaInfinity, FaEthereum} from 'react-icons/fa';
 
 import ConnectButton from './ConnectButton';
 import Container from './Container';
@@ -42,6 +42,17 @@ export default function Header() {
                 effect="solid"
                 textColor="#e2e8f0"
               />
+              <a
+                href={projectConfig.scanUrl}
+                aria-label={`${projectConfig.nftName} on Etherscan`}
+                rel="noopener noreferrer"
+                target="_blank"
+                data-tip="Etherscan"
+                data-for="header"
+                className="bg-gray-700 hover:bg-gray-600 rounded-full p-2"
+              >
+                <FaEthereum />
+              </a>
               <a
                 href={projectConfig.twitterUrl}
                 aria-label={`${projectConfig.nftName} on Twitter`}

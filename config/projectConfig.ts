@@ -41,7 +41,7 @@ const projectConfig = {
     //   ? 'your_mainnet_contract_address'
     //   : '0x55f6463854bf37f8B99B5409CA039137138d27F6',
 
-  scanUrl: 'https://kovan.etherscan.io/address/0x55f6463854bf37f8B99B5409CA039137138d27F6',
+  scanUrl: 'https://rinkeby.etherscan.io/address/0x5c3ae745a6104e53248330c3281e47e7af772eee',
     // process.env.NODE_ENV === 'production'
     //   ? 'https://polygonscan.com/address/your_polygon_contract_address'
     //   : 'https://kovan.etherscan.io/address/0x55f6463854bf37f8B99B5409CA039137138d27F6',
