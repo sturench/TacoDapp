@@ -18,7 +18,7 @@ export default function Meta({ pageTitle }: Props) {
   const ogType = router.pathname === '/' ? 'website' : 'article';
   const ogTitle = pageTitle
     ? pageTitle
-    : 'An NFT Faucet on the Kovan Network';
+    : `Help ${projectConfig.nftName} find a way to save Choco Taco!`;
   const ogImage = projectConfig.siteUrl + meta.ogImagePath;
 
   return (
