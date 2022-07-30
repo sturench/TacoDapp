@@ -31,7 +31,7 @@ const Home: NextPage = () => {
                                     <li className="pb-1">1 free Mocko Taco + gas mint per wallet</li>
                                     <li className="pb-1">Reserving 100 Mocko Tacos for Creators</li>
                                     <li className="pb-1">No roadmap. No utility. No Discord. CC0.</li>
-                                    <li className="pb-1">You can checkout the contract for yourself.</li>
+                                    <li className="pb-1">You can check out the contract for yourself.</li>
                                     <li className="pb-1">#SavetheChocoTaco</li>
                                 </ul>
                             </div>
