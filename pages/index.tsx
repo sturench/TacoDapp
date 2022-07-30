@@ -57,15 +57,15 @@ const Home: NextPage = () => {
                 <Prose>
                     <div className="wrap mx-auto pt-8">
                         <div className="grid grid-cols-12">
-                            <div className="bg-white row-span-full col-start-1 col-span-7 self-center p-4">
-                                <h1>The Mocko Taco NFT Mint for the Greater Good</h1>
-                                <ul className="list-disc ml-6 font-semibold py-2">
-                                    <li>4005 randomly generated Mocko Tacos</li>
-                                    <li>1 free Mocko Taco + gas mint per wallet</li>
-                                    <li>Reserving 100 Mocko Tacos for Creators</li>
-                                    <li>No roadmap. No utility. No Discord. CC0.</li>
-                                    <li>You can checkout the contract for yourself.</li>
-                                    <li>#SavetheChocoTaco</li>
+                            <div className="bg-white row-span-full col-start-1 col-span-7 self-center p-10">
+                                <h1 className="">The Mocko Taco NFT Mint for the Greater Good</h1>
+                                <ul className="list-disc ml-6 font-semibold py-3 text-sm">
+                                    <li className="pb-1">4005 randomly generated Mocko Tacos</li>
+                                    <li className="pb-1">1 free Mocko Taco + gas mint per wallet</li>
+                                    <li className="pb-1">Reserving 100 Mocko Tacos for Creators</li>
+                                    <li className="pb-1">No roadmap. No utility. No Discord. CC0.</li>
+                                    <li className="pb-1">You can checkout the contract for yourself.</li>
+                                    <li className="pb-1">#SavetheChocoTaco</li>
                                 </ul>
                             </div>
                             <div className="row-span-full col-span-6 col-end-13 self-center -z-20">
@@ -91,12 +91,12 @@ const Home: NextPage = () => {
 
                     <div className="py-8 flex justify-center items-center">
 
-                        <div className="flex-initial w-1/3 px-2">
+                        <div className="flex-initial w-2/5 px-2">
                             <Image src={MOCKO_CHARACTER} alt={projectConfig.nftName}/>
                         </div>
-                        <div className="flex-col justify-center items-center w-2/3 px-2">
+                        <div className="flex-col justify-center items-center w-3/5 px-2">
                             <h1 className="">Save the Choco Taco!!</h1>
-                            <div className="text-xl">
+                            <div className="text-sm">
                                 <p className="py-2">Yes, we’ve heard the news! We’re devastated that the Choco Taco
                                     has been discontinued. But we’re fighters! We’re believers! It may be gone now, but
                                     we believe it’s not gone forever!</p>

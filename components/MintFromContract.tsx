@@ -92,6 +92,9 @@ export default function MintFromContract(props: Props) {
     const copyMerkle = () => {
         navigator.clipboard.writeText(merkleProof ? merkleProof : "")
         setMessage("Copied!")
+        setTimeout(() => {
+            setMessage("");
+        },  1000)
     }
 
     return (
@@ -134,9 +137,9 @@ export default function MintFromContract(props: Props) {
                         </>
                     )
                     }
+                    <div className="flex justify-end items-center text-white">{message}</div>
                 </div>
-                <div className="flex justify-center items-center text-white">{message}</div>
-                <div className="flex justify-center items-center text-white">
+                <div className="flex justify-center items-center text-white w-2/3 text-sm">
                         <p>Head over to Etherscan and look for the <span
                         className="font-extrabold">mintAllowlistTaco</span> function. Paste the value in <span
                         className="font-extrabold">_merkleProof</span> field and you are good to go!
