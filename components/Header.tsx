@@ -21,11 +21,11 @@ export default function Header() {
         <div className="">
             <header className="py-4 mx-auto w-max">
                 <div className="">
-                    <div className="flex justify-end">
+                    <div className="flex justify-end pr-4">
                         <ConnectButton/>
                     </div>
-                    <div className="flex items-center justify-between p-6 container mx-auto">
-                        <div className="px-20 mx-auto">
+                    <div className="flex items-center justify-between p-6 container mx-auto max-w-screen-md">
+                        <div className="w-3/5 mx-auto">
                             <Image src={MOCKO_LOGO_IMG} alt={projectConfig.nftName}/>
                         </div>
 
