@@ -1,10 +1,8 @@
 import dynamic from 'next/dynamic';
 import {
-    FaHome,
     FaTwitter,
-    FaDiscord,
     FaShip,
-    FaInfinity, FaEthereum,
+    FaEthereum,
 } from 'react-icons/fa';
 
 import Container from './Container';

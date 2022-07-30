@@ -1,7 +1,5 @@
 import {useEffect, useState} from 'react';
 import {ethers} from 'ethers';
-import {IconContext} from 'react-icons';
-import {FaMinusCircle, FaPlusCircle} from 'react-icons/fa';
 import {MerkleTree} from 'merkletreejs'
 
 const keccak = require('keccak256')
@@ -9,7 +7,6 @@ const keccak = require('keccak256')
 import rpcConfig from '../config/rpcConfig';
 import projectConfig from '../config/projectConfig';
 import {useWallet} from "../context/AppContext";
-import Image from "next/image";
 import allowlist from '../config/allowlist.json';
 
 const {addresses} = allowlist
@@ -241,33 +238,6 @@ export default function Minting(props: Props) {
                         {projectConfig.chainName} {priceName} (excluding gas fees)
                     </p>
                 </div>
-
-                {/*<div className="flex justify-center items-center space-x-4">*/}
-                {/*    <IconContext.Provider value={{size: '1.5em'}}>*/}
-                {/*        <button*/}
-                {/*            type="button"*/}
-                {/*            className={mintAmount <= 1 ? 'text-gray-500 cursor-default' : ''}*/}
-                {/*            onClick={decrementMintAmount}*/}
-                {/*            disabled={false}*/}
-                {/*        >*/}
-                {/*            <FaMinusCircle/>*/}
-                {/*        </button>*/}
-                {/*        <span className="text-xl">{mintAmount}</span>*/}
-                {/*        <button*/}
-                {/*            type="button"*/}
-                {/*            className={*/}
-                {/*                mintAmount >= projectConfig.maxMintAmountPerTxn*/}
-                {/*                    ? 'text-gray-500 cursor-default'*/}
-                {/*                    : ''*/}
-                {/*            }*/}
-                {/*            onClick={incrementMintAmount}*/}
-                {/*            disabled={false}*/}
-                {/*        >*/}
-                {/*            <FaPlusCircle/>*/}
-                {/*        </button>*/}
-                {/*    </IconContext.Provider>*/}
-                {/*</div>*/}
-
                 <div className="flex justify-center text-white">
                     {isConnected && !connErrMsg ? (
                         <>
@@ -330,12 +300,6 @@ export default function Minting(props: Props) {
                     <div className="text-red-500 text-center">{connErrMsg}</div>
                 )}
             </div>
-
-            {/*<div className="text-gray-400 mt-2">*/}
-            {/*    Please make sure you are connected to the correct address and the*/}
-            {/*    correct network ({projectConfig.networkName}) before purchasing. The*/}
-            {/*    operation cannot be undone after purchase.*/}
-            {/*</div>*/}
         </>
     );
 }

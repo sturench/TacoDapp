@@ -1,15 +1,9 @@
-import {SetStateAction, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ethers} from 'ethers';
-import {IconContext} from 'react-icons';
-import {FaMinusCircle, FaPlusCircle} from 'react-icons/fa';
 import {MerkleTree} from 'merkletreejs'
 
 const keccak = require('keccak256')
 
-import rpcConfig from '../config/rpcConfig';
-import projectConfig from '../config/projectConfig';
-import {useWallet} from "../context/AppContext";
-import Image from "next/image";
 import allowlist from '../config/allowlist.json';
 
 const {addresses} = allowlist
