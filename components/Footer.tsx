@@ -51,11 +51,11 @@ export default function Footer() {
                         <FaTwitter/>
                     </a>
                     <a
-                        href={projectConfig.discordUrl}
-                        aria-label={`${projectConfig.nftName} on Discord`}
+                        href={projectConfig.openseaCollectionUrl}
+                        aria-label={`${projectConfig.nftName} on OpenSea`}
                         rel="noopener noreferrer"
                         target="_blank"
-                        data-tip="Discord"
+                        data-tip="OpenSea"
                         data-for="footer"
                         className="bg-dark_choco hover:bg-choco text-taco_2 rounded-full p-2"
                     >

@@ -21,20 +21,20 @@ export default function Header() {
                 <Container>
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-2"></div>
-                        <div className="font-inter text-base text-dark_choco font-black">
+                        <div className="font-inter text-sm text-dark_choco font-black">
                             <Link href={projectConfig.twitterUrl}
                                   rel="noopener noreferrer"
                                   target="_blank"
                             >TWITTER</Link>
                         </div>
 
-                        <div className="font-inter text-base text-dark_choco font-black">
+                        <div className="font-inter text-sm text-dark_choco font-black">
                             <Link href={projectConfig.openseaCollectionUrl}
                                   rel="noopener noreferrer"
                                   target="_blank"
                             >OPENSEA</Link>
                         </div>
-                        <div className="font-inter text-base text-dark_choco font-black">
+                        <div className="font-inter text-sm text-dark_choco font-black">
                             <Link href={projectConfig.scanUrl}
                                   rel="noopener noreferrer"
                                   target="_blank"
