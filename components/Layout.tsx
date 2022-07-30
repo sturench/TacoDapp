@@ -15,13 +15,7 @@ export default function Layout({children, pageTitle}: Props) {
     return (
         <>
             <Meta pageTitle={pageTitle}/>
-            <div className="flex items-center justify-between p-6 container mx-auto">
-                <Prose>
-                    <div className="px-20 mx-auto">
-                        <Image src={MOCKO_LOGO_IMG} alt={projectConfig.nftName}/>
-                    </div>
-                </Prose>
-            </div>
+
             <Header/>
             <main>{children}</main>
             <Footer/>

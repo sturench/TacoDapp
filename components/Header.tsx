@@ -9,6 +9,7 @@ import NextLink from './NextLink';
 import projectConfig from '../config/projectConfig';
 import Logo from '../public/assets/logo.png';
 import Link from "next/link";
+import MOCKO_LOGO_IMG from "../public/assets/mt.sitelogo.png";
 
 const ReactTooltip = dynamic(() => import('react-tooltip'), {
     ssr: false,
@@ -18,35 +19,40 @@ export default function Header() {
 
     return (
         <div className="">
-            <header className="py-2">
-                <Prose>
-                    <div className="grid grid-cols-3  items-center border">
-                        <div className="col-start-2 flex items-center w-3/5 border">
-                            <div className="font-inter text-sm text-dark_choco font-black pr-10">
-                                <Link href={projectConfig.twitterUrl}
-                                      rel="noopener noreferrer"
-                                      target="_blank"
-                                >TWITTER</Link>
-                            </div>
+            <header className="py-4 mx-auto w-max">
+                <div className="">
+                    <div className="flex justify-end">
+                        <ConnectButton/>
+                    </div>
+                    <div className="flex items-center justify-between p-6 container mx-auto">
+                        <div className="px-20 mx-auto">
+                            <Image src={MOCKO_LOGO_IMG} alt={projectConfig.nftName}/>
+                        </div>
 
-                            <div className="font-inter text-sm text-dark_choco font-black">
-                                <Link href={projectConfig.openseaCollectionUrl}
-                                      rel="noopener noreferrer"
-                                      target="_blank"
-                                >OPENSEA</Link>
-                            </div>
-                            <div className="font-inter text-sm text-dark_choco font-black pl-10">
-                                <Link href={projectConfig.scanUrl}
-                                      rel="noopener noreferrer"
-                                      target="_blank"
-                                >ETHERSCAN</Link>
-                            </div>
+                    </div>
+                </div>
+                <Prose>
+                    <div className="flex justify-center items-center space-x-20">
+                        <div className="font-inter text-sm text-dark_choco font-black">
+                            <Link href={projectConfig.twitterUrl}
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                            >TWITTER</Link>
                         </div>
-                        <div className="col-start-3 justify-self-end w-1/5">
-                            <div className="flex items-center space-x-2 ml-2 sm:ml-0">
-                                <ConnectButton/>
-                            </div>
+
+                        <div className="font-inter text-sm text-dark_choco font-black">
+                            <Link href={projectConfig.openseaCollectionUrl}
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                            >OPENSEA</Link>
                         </div>
+                        <div className="font-inter text-sm text-dark_choco font-black">
+                            <Link href={projectConfig.scanUrl}
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                            >ETHERSCAN</Link>
+                        </div>
+
                     </div>
                 </Prose>
             </header>
