@@ -94,16 +94,17 @@ export default function MintFromContract(props: Props) {
         setMessage("Copied!")
         setTimeout(() => {
             setMessage("");
-        },  1000)
+        }, 1000)
     }
 
     return (
         <>
             <div className="bg-choco rounded-lg p-8 space-y-4">
                 <h1 className="text-white text-center">
-                    Would you rather mint <br/>from the <a href={`https://kovan.etherscan.io/address/${ContractAddress}`}
-                                                      target="_blank"
-                                                      rel="noreferrer">contract</a>?
+                    Would you rather mint <br/>from the <a
+                    href={`https://kovan.etherscan.io/address/${ContractAddress}`}
+                    target="_blank"
+                    rel="noreferrer">contract</a>?
                 </h1>
                 <div className="flex justify-center items-center">
                     <input placeholder="Your 0x Wallet Address" value={walletAddressField}
@@ -139,13 +140,13 @@ export default function MintFromContract(props: Props) {
                     }
                     <div className="flex justify-end items-center text-white">{message}</div>
                 </div>
-                <div className="flex justify-center items-center text-white w-2/3 text-sm">
-                        <p>Head over to Etherscan and look for the <span
+                <div className="flex justify-center items-center ">
+                    <div className="text-center text-white w-3/5 text-sm">Head over to Etherscan and look for the <span
                         className="font-extrabold">mintAllowlistTaco</span> function. Paste the value in <span
                         className="font-extrabold">_merkleProof</span> field and you are good to go!
-                        </p>
                     </div>
                 </div>
+            </div>
         </>
     );
 }

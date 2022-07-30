@@ -91,7 +91,7 @@ const Home: NextPage = () => {
 
                     <div className="py-8 flex justify-center items-center">
 
-                        <div className="flex-initial w-2/5 px-2">
+                        <div className="flex-initial w-2/5 pr-8">
                             <Image src={MOCKO_CHARACTER} alt={projectConfig.nftName}/>
                         </div>
                         <div className="flex-col justify-center items-center w-3/5 px-2">

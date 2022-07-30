@@ -62,7 +62,7 @@ export default function Footer() {
                         <FaShip/>
                     </a>
                 </div>
-                <div className="flex flex-col-reverse sm:flex-row justify-center items-center py-4">
+                <div className="flex flex-col-reverse sm:flex-row justify-center items-center py-4 text-sm">
                     <div>
                         © {getCurrentYear()} MockoTaco | A project by *redacted.*
                     </div>
