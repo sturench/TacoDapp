@@ -57,7 +57,7 @@ const Home: NextPage = () => {
                 <Prose>
                     <div className="wrap mx-auto pt-8">
                         <div className="grid grid-cols-12">
-                            <div className="bg-white row-span-full col-start-1 col-span-7 self-center p-10">
+                            <div className="bg-white row-span-full col-start-1 col-span-7 self-center p-10 min-w-content">
                                 <h1 className="">The Mocko Taco NFT Mint for the Greater Good</h1>
                                 <ul className="list-disc ml-6 font-semibold py-3 text-sm">
                                     <li className="pb-1">4005 randomly generated Mocko Tacos</li>
