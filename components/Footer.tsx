@@ -19,11 +19,11 @@ const getCurrentYear = () => new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="border-t">
+    <footer className="">
       <Container>
         <div className="flex flex-col-reverse sm:flex-row justify-between items-center py-8">
           <div>
-            © {getCurrentYear()} Mocko Taco
+            © {getCurrentYear()} MockoTaco
           </div>
 
           <div className="flex items-center space-x-2 mb-4 sm:mb-0">

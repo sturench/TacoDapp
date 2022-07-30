@@ -6,6 +6,8 @@
   h1,
   h2,
   h3 {
-    @apply text-pink-500;
+    @apply text-dark_choco;
   }
+  h2 {@apply text-3xl;}
+  h1 {@apply font-quador text-4xl text-dark_choco}
 }
