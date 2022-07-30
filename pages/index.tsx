@@ -26,6 +26,7 @@ import NCX_IMG from '../public/assets/NCX.webp';
 // import NMEEBIT_IMG from '../public/assets/NMEEBIT.png';
 import MOCKO_LOGO_IMG from '../public/assets/mockotaco_logo.png';
 import MOCKO_CHARACTER from '../public/assets/bottom_character.png';
+import SAVE_MOCKO from '../public/assets/mt 1.png';
 import Script from "next/script";
 
 const Home: NextPage = () => {
@@ -33,6 +34,8 @@ const Home: NextPage = () => {
         <Layout>
             <Head>
                 <title>{projectConfig.nftName}</title>
+                <link rel="stylesheet" href="https://use.typekit.net/bmy6hpx.css"/>
+                <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
             </Head>
             <div className="">
                 {/*<div className="flex py-8">*/}
@@ -51,55 +54,79 @@ const Home: NextPage = () => {
                 {/*        <p><strong>You are limited to 5 NFTs from each collection</strong></p>*/}
                 {/*    </Prose>*/}
                 {/*</div>*/}
+                <Prose>
+                    <div className="wrap mx-auto pt-8">
+                        <div className="grid grid-cols-12">
+                            <div className="bg-white row-span-full col-start-1 col-span-7 self-center p-4">
+                                <h1>The Mocko Taco NFT Mint for the Greater Good</h1>
+                                <ul className="list-disc ml-6 font-semibold py-2">
+                                    <li>4005 randomly generated Mocko Tacos</li>
+                                    <li>1 free Mocko Taco + gas mint per wallet</li>
+                                    <li>Reserving 100 Mocko Tacos for Creators</li>
+                                    <li>No roadmap. No utility. No Discord. CC0.</li>
+                                    <li>You can checkout the contract for yourself.</li>
+                                    <li>#SavetheChocoTaco</li>
+                                </ul>
+                            </div>
+                            <div className="row-span-full col-span-6 col-end-13 self-center -z-20">
+                                <Image src={SAVE_MOCKO}
+                                       alt="Save Mocko Taco"/>
+                            </div>
+                        </div>
+                    </div>
 
-                <div className="py-8">
-                    <Prose>
+                </Prose>
+
+                <Prose>
+                    <div className="py-8">
                         <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}
                                  ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"} ABI={MOCKOTACO_ABI}
                                  CollectionImage={NCX_IMG}
                         />
-                    </Prose>
-                </div>
-
-                <div className="py-8">
-                    <Prose>
-                        <MintFromContract ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"}/>
-                    </Prose>
-                </div>
-
-                <div className="py-8 flex">
-
-                    <div className="flex justify-center items-center">
-                        <Image src={MOCKO_CHARACTER} alt={projectConfig.nftName}/>
                     </div>
-                    <Prose>
-                        <div className="flex justify-center items-center">
-                            <h1>Save the Choco Taco!!</h1>
-                            <p>Yes, we’ve heard the news! We’re devastated that the Choco Taco has been discontinued. But we’re fighters! We’re believers! It may be gone now, but we believe it’s not gone forever!
 
-                            <br/>Let’s stand up for the nostalgic memories of our childhood. Let’s do something about the future frozen treats of our children. Let’s save the Choco Taco!</p>
+                    <div className="py-8">
+                        <MintFromContract ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"}/>
+                    </div>
+
+                    <div className="py-8 flex justify-center items-center">
+
+                        <div className="flex-initial w-1/3 px-2">
+                            <Image src={MOCKO_CHARACTER} alt={projectConfig.nftName}/>
                         </div>
-                    </Prose>
+                        <div className="flex-col justify-center items-center w-2/3 px-2">
+                            <h1 className="">Save the Choco Taco!!</h1>
+                            <div className="text-xl">
+                                <p className="py-2">Yes, we’ve heard the news! We’re devastated that the Choco Taco
+                                    has been discontinued. But we’re fighters! We’re believers! It may be gone now, but
+                                    we believe it’s not gone forever!</p>
 
-                </div>
+                                <p className="py-2">Let’s stand up for the nostalgic memories of our childhood. Let’s do
+                                    something about
+                                    the future frozen treats of our children. Let’s save the Choco Taco!</p>
+                            </div>
+                        </div>
 
-                {/*<div className="bg-gray-800 py-8">*/}
-                {/*    <Prose>*/}
-                {/*        <Faq/>*/}
-                {/*    </Prose>*/}
-                {/*</div>*/}
+                    </div>
 
-                {/*<div className="py-8">*/}
-                {/*    <Prose>*/}
-                {/*        <Roadmap/>*/}
-                {/*    </Prose>*/}
-                {/*</div>*/}
+                    {/*<div className="bg-gray-800 py-8">*/}
+                    {/*    <Prose>*/}
+                    {/*        <Faq/>*/}
+                    {/*    </Prose>*/}
+                    {/*</div>*/}
 
-                {/*<div className="bg-gray-800 py-8">*/}
-                {/*    <Prose>*/}
-                {/*        <Team/>*/}
-                {/*    </Prose>*/}
-                {/*</div>*/}
+                    {/*<div className="py-8">*/}
+                    {/*    <Prose>*/}
+                    {/*        <Roadmap/>*/}
+                    {/*    </Prose>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="bg-gray-800 py-8">*/}
+                    {/*    <Prose>*/}
+                    {/*        <Team/>*/}
+                    {/*    </Prose>*/}
+                    {/*</div>*/}
+                </Prose>
             </div>
         </Layout>
     );

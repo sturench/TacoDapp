@@ -9,5 +9,6 @@
     @apply text-dark_choco;
   }
   h2 {@apply text-3xl;}
-  h1 {@apply font-quador text-4xl text-dark_choco}
+  h1 {@apply font-quador text-4xl text-dark_choco font-extrabold}
+  html {@apply font-inter}
 }
