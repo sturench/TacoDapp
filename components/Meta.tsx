@@ -8,8 +8,8 @@ type Props = {
 };
 
 const meta = {
-  description: `${projectConfig.nftName} is a faucet for NFTs on the Kovan Network.`,
-  ogImagePath: '/assets/asset-sampler.png',
+  description: `Help ${projectConfig.nftName} find a way to save Choco Taco!`,
+  ogImagePath: '/assets/mt 1.png',
 };
 
 export default function Meta({ pageTitle }: Props) {
@@ -18,7 +18,7 @@ export default function Meta({ pageTitle }: Props) {
   const ogType = router.pathname === '/' ? 'website' : 'article';
   const ogTitle = pageTitle
     ? pageTitle
-    : 'An NFT Faucet on the Kovan Network';
+    : `Help ${projectConfig.nftName} find a way to save Choco Taco!`;
   const ogImage = projectConfig.siteUrl + meta.ogImagePath;
 
   return (

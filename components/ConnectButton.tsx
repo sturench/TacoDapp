@@ -125,23 +125,23 @@ export default function ConnectButton() {
         <div className="flex justify-center">
             {isConnected && walletAddress ?
                 (
-                    <span className="flex items-center space-x-2 p-2 bg-gray-700 rounded-full">
+                    <span className="flex items-center space-x-2 p-1 bg-dark_choco rounded-lg">
                   <Jazzicon
                       diameter={32}
                       seed={jsNumberForAddress(walletAddress.toLowerCase())}
                   />
-                  <span>
+                  <span className="text-white text-sm">
                     {`${walletAddress.substring(0, 6)}...${walletAddress.substring(
                         walletAddress.length - 4
                     )}`}
                   </span>
-                <FaSignOutAlt onClick={disconnectWallet}/>
+                <FaSignOutAlt className='text-white' onClick={disconnectWallet}/>
                 </span>
                 ) : (
                     isConnecting ? (
                         <button
                             type="button"
-                            className="flex justify-center items-center border-2 border-gray-500 bg-gray-800 rounded-full px-4 py-2 w-40 cursor-not-allowed"
+                            className="flex justify-center items-center border-2 bg-dark_choco rounded-lg px-4 py-1 w-40 cursor-not-allowed text-white"
                             disabled
                         >
                             <svg
@@ -169,11 +169,11 @@ export default function ConnectButton() {
                     ) : (
                         <button
                             type="button"
-                            className="flex justify-center items-center space-x-2 border-2 border-gray-500 hover:border-gray-400 bg-gray-800 rounded-full px-4 py-2 w-40"
+                            className="flex justify-center items-center space-x-2 hover:border-gray-400 bg-dark_choco rounded-lg px-4 py-1 w-40"
                             onClick={connectWallet}
                         >
-                            <FaWallet/>
-                            <span>Connect</span>
+                            <FaWallet className="text-white"/>
+                            <span className="text-white">Connect</span>
                         </button>
                     ))
             }
