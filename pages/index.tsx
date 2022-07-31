@@ -9,8 +9,8 @@ import MintFromContract from '../components/MintFromContract';
 import projectConfig from '../config/projectConfig';
 import MOCKOTACO_ABI from '../config/MockoTacoABI.json';
 import NCX_IMG from '../public/assets/NCX.webp';
-import MOCKO_CHARACTER from '../public/assets/bottom_character.png';
-import SAVE_MOCKO from '../public/assets/mt 1.png';
+import MOCKO_CHARACTER from '../public/assets/mt.site.2.png';
+import SAVE_MOCKO from '../public/assets/mt.site.1.jpg';
 
 const Home: NextPage = () => {
     return (
@@ -31,11 +31,12 @@ const Home: NextPage = () => {
                             <div className="bg-white sm:row-span-full sm:col-start-1 sm:col-span-7 self-center p-10 min-w-content sm:w-auto w-5/6 mx-auto">
                                 <h1 className="">The Mocko Taco NFT Mint for the Greater Good</h1>
                                 <ul className="list-disc ml-6 font-semibold py-3 sm:text-sm text-xs">
+                                    <li className="pb-1">Minting Soon - TBD in August</li>
                                     <li className="pb-1">4005 randomly generated Mocko Tacos</li>
                                     <li className="pb-1">1 free Mocko Taco + gas mint per wallet</li>
                                     <li className="pb-1">Reserving 100 Mocko Tacos for Creators</li>
                                     <li className="pb-1">No roadmap. No utility. No Discord. CC0.</li>
-                                    <li className="pb-1">You can check out the contract for yourself.</li>
+                                    {/*<li className="pb-1">You can check out the contract for yourself.</li>*/}
                                     <li className="pb-1">#SavetheChocoTaco</li>
                                 </ul>
                             </div>
