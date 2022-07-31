@@ -23,10 +23,14 @@ const Home: NextPage = () => {
             <div className="">
                 <Prose>
                     <div className="wrap mx-auto pt-8">
-                        <div className="grid grid-cols-12">
-                            <div className="bg-white row-span-full col-start-1 col-span-7 self-center p-10 min-w-content">
+                        <div className="sm:grid sm:grid-cols-12">
+                            <div className="sm:row-span-full sm:col-span-6 sm:col-end-13 self-center -z-20 sm:w-auto w-2/3 mx-auto">
+                                <Image src={SAVE_MOCKO}
+                                       alt="Save Mocko Taco"/>
+                            </div>
+                            <div className="bg-white sm:row-span-full sm:col-start-1 sm:col-span-7 self-center p-10 min-w-content sm:w-auto w-5/6 mx-auto">
                                 <h1 className="">The Mocko Taco NFT Mint for the Greater Good</h1>
-                                <ul className="list-disc ml-6 font-semibold py-3 text-sm">
+                                <ul className="list-disc ml-6 font-semibold py-3 sm:text-sm text-xs">
                                     <li className="pb-1">4005 randomly generated Mocko Tacos</li>
                                     <li className="pb-1">1 free Mocko Taco + gas mint per wallet</li>
                                     <li className="pb-1">Reserving 100 Mocko Tacos for Creators</li>
@@ -35,10 +39,7 @@ const Home: NextPage = () => {
                                     <li className="pb-1">#SavetheChocoTaco</li>
                                 </ul>
                             </div>
-                            <div className="row-span-full col-span-6 col-end-13 self-center -z-20">
-                                <Image src={SAVE_MOCKO}
-                                       alt="Save Mocko Taco"/>
-                            </div>
+
                         </div>
                     </div>
 
@@ -56,14 +57,14 @@ const Home: NextPage = () => {
                     {/*    <MintFromContract ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"}/>*/}
                     {/*</div>*/}
 
-                    <div className="py-8 flex justify-center items-center">
+                    <div className="py-8 flex sm:flex-row flex-col justify-center items-center">
 
-                        <div className="flex-initial w-2/5 pr-8">
+                        <div className="flex-initial sm:w-2/5 w-3/5 pr-8">
                             <Image src={MOCKO_CHARACTER} alt={projectConfig.nftName}/>
                         </div>
-                        <div className="flex-col justify-center items-center w-3/5 px-2">
+                        <div className="flex-col justify-center items-center sm:w-3/5 w-4/5 px-2">
                             <h1 className="">Save the Choco Taco!!</h1>
-                            <div className="text-sm">
+                            <div className="sm:text-sm text-xs">
                                 <p className="py-2">Yes, we’ve heard the news! We’re devastated that the Choco Taco
                                     has been discontinued. But we’re fighters! We’re believers! It may be gone now, but
                                     we believe it’s not gone forever!</p>
