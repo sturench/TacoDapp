@@ -17,9 +17,9 @@ export default function Header() {
         <div className="">
             <header className="py-4 mx-auto w-max sm:max-w-screen-md">
                 <div className="">
-                    <div className="flex justify-end pr-4">
-                        <ConnectButton/>
-                    </div>
+                    {/*<div className="flex justify-end pr-4">*/}
+                    {/*    <ConnectButton/>*/}
+                    {/*</div>*/}
                     <div className="flex items-center justify-between p-6 container mx-auto max-w-screen-md ">
                         <div className="w-3/5 mx-auto">
                             <Image src={MOCKO_LOGO_IMG} alt={projectConfig.nftName}/>
@@ -30,23 +30,31 @@ export default function Header() {
                 <Prose>
                     <div className="flex justify-center items-center space-x-20">
                         <div className="font-inter text-sm text-dark_choco font-black">
-                            <Link href={projectConfig.twitterUrl}
+                            <a href={projectConfig.twitterUrl}
                                   rel="noopener noreferrer"
                                   target="_blank"
-                            >TWITTER</Link>
+                            >TWITTER</a>
                         </div>
 
                         <div className="font-inter text-sm text-dark_choco font-black">
-                            <Link href={projectConfig.openseaCollectionUrl}
+                            {/*<Link href={projectConfig.openseaCollectionUrl}*/}
+                            {/*      rel="noopener noreferrer"*/}
+                            {/*      target="_blank"*/}
+                            {/*>OPENSEA</Link>*/}
+                            <Link href=""
                                   rel="noopener noreferrer"
                                   target="_blank"
-                            >OPENSEA</Link>
+                            >OPENSEA (Soon)</Link>
                         </div>
                         <div className="font-inter text-sm text-dark_choco font-black">
-                            <Link href={projectConfig.scanUrl}
+                            <Link href=""
                                   rel="noopener noreferrer"
                                   target="_blank"
-                            >ETHERSCAN</Link>
+                            >ETHERSCAN (Soon)</Link>
+                            {/*<a href={projectConfig.scanUrl}*/}
+                            {/*      rel="noopener noreferrer"*/}
+                            {/*      target="_blank"*/}
+                            {/*>ETHERSCAN</a>*/}
                         </div>
 
                     </div>

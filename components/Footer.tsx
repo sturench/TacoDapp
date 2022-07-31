@@ -26,17 +26,7 @@ export default function Footer() {
                         effect="solid"
                         textColor="#e2e8f0"
                     />
-                    <a
-                        href={projectConfig.scanUrl}
-                        aria-label={`${projectConfig.nftName} on Etherscan`}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        data-tip="Etherscan"
-                        data-for="footer"
-                        className="bg-dark_choco hover:bg-choco text-taco_2 rounded-full p-2"
-                    >
-                        <FaEthereum/>
-                    </a>
+
                     <a
                         href={projectConfig.twitterUrl}
                         aria-label={`${projectConfig.nftName} on Twitter`}
@@ -49,16 +39,49 @@ export default function Footer() {
                         <FaTwitter/>
                     </a>
                     <a
-                        href={projectConfig.openseaCollectionUrl}
+                        href=""
+                        aria-label={`${projectConfig.nftName} on Etherscan`}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        data-tip="Etherscan (Soon)"
+                        data-for="footer"
+                        className="bg-dark_choco hover:bg-choco text-taco_2 rounded-full p-2"
+                    >
+                        <FaEthereum/>
+                    </a>
+                    <a
+                        href=""
                         aria-label={`${projectConfig.nftName} on OpenSea`}
                         rel="noopener noreferrer"
                         target="_blank"
-                        data-tip="OpenSea"
+                        data-tip="OpenSea (Soon)"
                         data-for="footer"
                         className="bg-dark_choco hover:bg-choco text-taco_2 rounded-full p-2"
                     >
                         <FaShip/>
                     </a>
+                    {/*<a*/}
+                    {/*    href={projectConfig.scanUrl}*/}
+                    {/*    aria-label={`${projectConfig.nftName} on Etherscan`}*/}
+                    {/*    rel="noopener noreferrer"*/}
+                    {/*    target="_blank"*/}
+                    {/*    data-tip="Etherscan"*/}
+                    {/*    data-for="footer"*/}
+                    {/*    className="bg-dark_choco hover:bg-choco text-taco_2 rounded-full p-2"*/}
+                    {/*>*/}
+                    {/*    <FaEthereum/>*/}
+                    {/*</a>*/}
+                    {/*<a*/}
+                    {/*    href={projectConfig.openseaCollectionUrl}*/}
+                    {/*    aria-label={`${projectConfig.nftName} on OpenSea`}*/}
+                    {/*    rel="noopener noreferrer"*/}
+                    {/*    target="_blank"*/}
+                    {/*    data-tip="OpenSea"*/}
+                    {/*    data-for="footer"*/}
+                    {/*    className="bg-dark_choco hover:bg-choco text-taco_2 rounded-full p-2"*/}
+                    {/*>*/}
+                    {/*    <FaShip/>*/}
+                    {/*</a>*/}
                 </div>
                 <div className="flex flex-col-reverse sm:flex-row justify-center items-center py-4 text-sm">
                     <div>

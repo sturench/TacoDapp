@@ -5,6 +5,7 @@ import {MerkleTree} from 'merkletreejs'
 const keccak = require('keccak256')
 
 import allowlist from '../config/allowlist.json';
+import projectConfig from "../config/projectConfig";
 
 const {addresses} = allowlist
 
@@ -96,7 +97,7 @@ export default function MintFromContract(props: Props) {
             <div className="bg-choco rounded-lg p-8 space-y-4">
                 <h1 className="text-white text-center">
                     Would you rather mint <br/>from the <a
-                    href={`https://kovan.etherscan.io/address/${ContractAddress}`}
+                    href={projectConfig.scanUrl}
                     target="_blank"
                     rel="noreferrer">contract</a>?
                 </h1>
@@ -135,7 +136,7 @@ export default function MintFromContract(props: Props) {
                     <div className="flex justify-end items-center text-white">{message}</div>
                 </div>
                 <div className="flex justify-center items-center ">
-                    <div className="text-center text-white w-3/5 text-sm">Head over to Etherscan and look for the <span
+                    <div className="text-center text-white w-3/5 text-sm">Head over to <a href={projectConfig.scanUrl} target="_blank" rel="noreferrer">Etherscan</a> ({projectConfig.contractAddress}) and look for the <span
                         className="font-extrabold">mintAllowlistTaco</span> function. Paste the value in <span
                         className="font-extrabold">_merkleProof</span> field and you are good to go!
                     </div>
