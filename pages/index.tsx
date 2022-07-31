@@ -63,7 +63,7 @@ const Home: NextPage = () => {
                             <Image src={MOCKO_CHARACTER} alt={projectConfig.nftName}/>
                         </div>
                         <div className="flex-col justify-center items-center sm:w-3/5 w-4/5 px-2">
-                            <h1 className="">Save the Choco Taco!!</h1>
+                            <h1 className="text-center">Save the Choco Taco!!</h1>
                             <div className="sm:text-sm text-xs">
                                 <p className="py-2">Yes, we’ve heard the news! We’re devastated that the Choco Taco
                                     has been discontinued. But we’re fighters! We’re believers! It may be gone now, but
