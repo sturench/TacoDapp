@@ -45,16 +45,16 @@ const Home: NextPage = () => {
                 </Prose>
 
                 <Prose>
-                    <div className="py-8">
-                        <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}
-                                 ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"} ABI={MOCKOTACO_ABI}
-                                 CollectionImage={NCX_IMG}
-                        />
-                    </div>
+                    {/*<div className="py-8">*/}
+                    {/*    <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}*/}
+                    {/*             ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"} ABI={MOCKOTACO_ABI}*/}
+                    {/*             CollectionImage={NCX_IMG}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
 
-                    <div className="py-8">
-                        <MintFromContract ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"}/>
-                    </div>
+                    {/*<div className="py-8">*/}
+                    {/*    <MintFromContract ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"}/>*/}
+                    {/*</div>*/}
 
                     <div className="py-8 flex justify-center items-center">
 
