@@ -15,7 +15,7 @@ const ReactTooltip = dynamic(() => import('react-tooltip'), {
 const getCurrentYear = () => new Date().getFullYear();
 
 export default function Footer() {
-    console.debug(process.env.NODE_ENV)
+    console.debug(process.env.VERCEL_ENV)
     return (
         <footer className="">
             <Container>
