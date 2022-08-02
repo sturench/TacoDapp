@@ -1,8 +1,8 @@
 const projectConfig = {
   allowlistMintActive: false,
-  publicMintActive: true,
+  publicMintActive: false,
 
-  allowMultiple: true, // implement if needed
+  allowMultiple: false, // implement if needed
 
   nftName: 'Mocko Taco',
 
