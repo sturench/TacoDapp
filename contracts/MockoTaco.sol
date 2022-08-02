@@ -2,14 +2,13 @@
 pragma solidity ^0.8.15;
 
 import "erc721a/contracts/ERC721A.sol";
-import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/interfaces/IERC721.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract MockoTaco is ERC721A, ERC2981, Ownable, ReentrancyGuard {
+contract MockoTaco is ERC721A, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
     uint256 public constant MAX_MINT_SUPPLY = 4005;
@@ -264,48 +263,5 @@ contract MockoTaco is ERC721A, ERC2981, Ownable, ReentrancyGuard {
      */
     function checkAddressOnMintMerkleWalletList(address wallet) public view returns (bool) {
         return mintMerkleWalletList[wallet];
-    }
-
-    /**
-     * @inheritdoc ERC2981
-     */
-    function supportsInterface(bytes4 interfaceId)
-    public
-    view
-    virtual
-    override(ERC2981, ERC721A)
-    returns (bool)
-    {
-        return
-        interfaceId == type(IERC721).interfaceId ||
-        interfaceId == type(IERC721Metadata).interfaceId ||
-        interfaceId == type(IERC2981).interfaceId ||
-        super.supportsInterface(interfaceId);
-    }
-
-    /**
-     * @notice Sets token royalties
-     * @param receiver recipient of the royalties
-     * @param feeNumerator percentage (using 2 decimals - 10000 = 100, 0 = 0, 1000 = 10)
-     */
-    function setDefaultRoyalty(address receiver, uint96 feeNumerator)
-    external
-    onlyOwner
-    {
-        _setDefaultRoyalty(receiver, feeNumerator);
-    }
-
-    /*
-     * @notice Sets token royalties
-     * @param tokenId the token id fir which we register the royalties
-     * @param receiver recipient of the royalties
-     * @param feeNumerator percentage (using 2 decimals - 10000 = 100, 0 = 0, 1000 = 10)
-     */
-    function setTokenRoyalty(
-        uint256 tokenId,
-        address receiver,
-        uint96 feeNumerator
-    ) external onlyOwner {
-        _setTokenRoyalty(tokenId, receiver, feeNumerator);
     }
 }
