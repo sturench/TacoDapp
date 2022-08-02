@@ -99,7 +99,7 @@ export default function MintFromContract(props: Props) {
                     Would you rather mint <br/>from the <a
                     href={projectConfig.scanUrl}
                     target="_blank"
-                    rel="noreferrer">contract</a>?
+                    rel="noreferrer" className="underline">contract</a>?
                 </h1>
                 <div className="flex justify-center items-center">
                     <input placeholder="Your 0x Wallet Address" value={walletAddressField}
@@ -138,11 +138,12 @@ export default function MintFromContract(props: Props) {
                 <div className="flex justify-center items-center ">
                     <div className="text-center text-white w-4/5 text-sm">Head over to <a href={projectConfig.scanUrl}
                                                                                           target="_blank"
-                                                                                          rel="noreferrer">Etherscan
-                        ({projectConfig.contractAddress.substring(0, 5) + '...' + projectConfig.contractAddress.substring(projectConfig.contractAddress.length - 5, projectConfig.contractAddress.length)})
+                                                                                          rel="noreferrer"
+                                                                                          className="underline font-bold"
+                    >Etherscan ({projectConfig.contractAddress.substring(0, 7) + '...' + projectConfig.contractAddress.substring(projectConfig.contractAddress.length - 5, projectConfig.contractAddress.length)})
                     </a> and look for the <span
-                        className="font-extrabold">mintAllowlistTaco</span> function. Paste the value in <span
-                        className="font-extrabold">_merkleProof</span> field and you are good to go!
+                        className="font-semibold italic">mintAllowlistTaco</span> function. Paste the value in <span
+                        className="font-semibold italic">_merkleProof</span> field and you are good to go!
                     </div>
                 </div>
             </div>
