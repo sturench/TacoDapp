@@ -85,7 +85,7 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col-reverse sm:flex-row justify-center items-center py-4 sm:text-sm text-xs">
                     <div>
-                        © {getCurrentYear()} MockoTaco | A project by *redacted.*
+                        © {getCurrentYear()} MockoTaco | A project by *redacted*
                     </div>
                 </div>
             </Container>
