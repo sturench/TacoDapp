@@ -15,7 +15,6 @@ const ReactTooltip = dynamic(() => import('react-tooltip'), {
 const getCurrentYear = () => new Date().getFullYear();
 
 export default function Footer() {
-    console.debug(process.env.VERCEL_ENV)
     return (
         <footer className="">
             <Container>
@@ -94,7 +93,7 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col-reverse sm:flex-row justify-center items-center py-4 sm:text-sm text-xs">
                     <div>
-                        © {getCurrentYear()} MockoTaco | A project by *redacted*
+                        © {getCurrentYear()} MockoTaco | A project by *redacted* {process.env.NEXT_PUBLIC_VERCEL_ENV}
                     </div>
                 </div>
             </Container>
