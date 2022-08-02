@@ -8,7 +8,6 @@ import Minting from '../components/Minting';
 import MintFromContract from '../components/MintFromContract';
 import projectConfig from '../config/projectConfig';
 import MOCKOTACO_ABI from '../config/MockoTacoABI.json';
-import NCX_IMG from '../public/assets/NCX.webp';
 import MOCKO_CHARACTER from '../public/assets/mt.site.2.png';
 import SAVE_MOCKO from '../public/assets/mt.site.1.jpg';
 
@@ -47,16 +46,18 @@ const Home: NextPage = () => {
                 </Prose>
 
                 <Prose>
-                    {/*<div className="py-8">*/}
-                    {/*    <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}*/}
-                    {/*             ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"} ABI={MOCKOTACO_ABI}*/}
-                    {/*             CollectionImage={NCX_IMG}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
+                    {projectConfig.allowlistMintActive || projectConfig.publicMintActive ? (
+                        <>
+                    <div className="py-8">
+                        <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}
+                                 ContractAddress={projectConfig.contractAddress} ABI={MOCKOTACO_ABI}
+                                 CollectionImage={null}
+                        />
+                    </div>
 
-                    {/*<div className="py-8">*/}
-                    {/*    <MintFromContract ContractAddress={"0x5c3ae745a6104e53248330c3281e47e7af772eee"}/>*/}
-                    {/*</div>*/}
+                    <div className="py-8">
+                        <MintFromContract/>
+                    </div> </>) : ( <></>)}
 
                     <div className="py-8 flex sm:flex-row flex-col justify-center items-center">
 

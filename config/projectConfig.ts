@@ -1,4 +1,10 @@
 const projectConfig = {
+  allowlistMintActive: false,
+  publicMintActive: false,
+  revealHeaderFooter: false,
+
+  allowMultiple: false, // implement if needed
+
   nftName: 'Mocko Taco',
 
   nftSymbol: 'TACO',
@@ -6,23 +12,23 @@ const projectConfig = {
   maxSupply: 4005,
 
   maxMintAmountPerTxn: 1,
+  publicMintPrice: 0,
 
-  //  mintCost: process.env.NODE_ENV === 'production' ? 100 : 0.01,
+  //  mintCost: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? 100 : 0.01,
 
   networkName:
-    process.env.NODE_ENV === 'production'
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
       ? 'Ethereum Mainnet' // 'Ethereum Mainnet'
-      : 'Rinkeby Testnet', // 'Kovan Testnet'
+      : 'Rinkeby Testnet', // 'Rinkeby Testnet'
 
   chainName: 'ETH', // 'ETH'
 
-  chainId: process.env.NODE_ENV === 'production' ? 1 : 4, // Ethereum (1), Kovan (42)
-
-  siteDomain: 'www.mockotaco.com',
+  chainId: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? 1 : 4, // Ethereum (1), Rinkeby (4)
+  network: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? 'mainnet' : 'rinkeby',
 
   siteUrl:
-    process.env.NODE_ENV === 'production'
-      ? `https://your_site_domain`
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? `www.mockotaco.xyz`
       : 'http://localhost:3000',
 
   twitterUsername: '@MockoTaco',
@@ -32,21 +38,19 @@ const projectConfig = {
   discordUrl: 'https://discord.gg/jEJ3r9zDs9',
 
   openseaCollectionUrl:
-    process.env.NODE_ENV === 'production'
-      ? 'https://opensea.io/collection/your_opensea_collection_name'
-      : 'https://testnets.opensea.io/collection/your_opensea_collection_name',
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? 'https://opensea.io/collection/mockotaco'
+      : 'https://testnets.opensea.io/collection/mockotaco',
 
-  contractAddress:'0x5c3ae745a6104e53248330c3281e47e7af772eee',
-    // process.env.NODE_ENV === 'production'
-    //   ? 'your_mainnet_contract_address'
-    //   : '0x55f6463854bf37f8B99B5409CA039137138d27F6',
+  contractAddress:
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? 'your_mainnet_contract_address'
+      : '0x8F3232571adB80FBDe113274F3E9B6Bf73551361',
 
-  scanUrl: 'https://rinkeby.etherscan.io/address/0x5c3ae745a6104e53248330c3281e47e7af772eee',
-    // process.env.NODE_ENV === 'production'
-    //   ? 'https://polygonscan.com/address/your_polygon_contract_address'
-    //   : 'https://kovan.etherscan.io/address/0x55f6463854bf37f8B99B5409CA039137138d27F6',
-  // 'https://etherscan.io/address/your_ethereum_contract_address'
-  // 'https://rinkeby.etherscan.io/address/your_rinkeby_contract_address'
+  scanUrl:
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? 'https://etherscan.io/address/your_ethereum_contract_address'
+      : 'https://rinkeby.etherscan.io/address/0x8F3232571adB80FBDe113274F3E9B6Bf73551361',
 };
 
 export default projectConfig;

@@ -4,7 +4,6 @@ import {MerkleTree} from 'merkletreejs'
 
 const keccak = require('keccak256')
 
-import rpcConfig from '../config/rpcConfig';
 import projectConfig from '../config/projectConfig';
 import {useWallet} from "../context/AppContext";
 import allowlist from '../config/allowlist.json';
@@ -20,7 +19,7 @@ interface Props {
 }
 
 export default function Minting(props: Props) {
-    const {CollectionName, TokenSymbol, ContractAddress, ABI, CollectionImage} = props;
+    const {TokenSymbol, ContractAddress, ABI} = props;
     const {
         web3Provider,
         ethersProvider,
@@ -43,28 +42,32 @@ export default function Minting(props: Props) {
     const [isOnAllowList, setIsOnAllowlist] = useState(false);
     const [merkleProof, setMerkleProof] = useState<string[] | null>();
     const [merkleRoot, setMerkleRoot] = useState<Buffer | undefined>();
+    const [theContract, setTheContract] = useState<ethers.Contract>();
 
     async function mintNFTs() {
         setErrorMessage('');
         setMessage('');
         console.debug(web3Provider);
-        if (walletAddress && ethersProvider) {
+        if (walletAddress && ethersProvider && theContract) {
             const totalMintCost = (finalMintPrice * mintAmount).toString();
             const totalWei = ethers.utils.parseEther(totalMintCost).toBigInt();
             setMessage('');
             setIsPending(true);
             try {
-                const signer = ethersProvider?.getSigner();
-                const contract = new ethers.Contract(
-                    ContractAddress,
-                    ABI,
-                    signer
-                );
-                console.debug("the contract");
-                console.debug(contract);
-                const transaction = await contract.mintAllowlistTaco(mintAmount, merkleProof, {
-                    value: totalWei,
-                });
+                let transaction;
+                if(projectConfig.allowlistMintActive) {
+                    console.debug('minting an AL taco')
+                    transaction = await theContract.mintAllowlistTaco(merkleProof);
+                } else if (projectConfig.publicMintActive) {
+                    console.debug('minting a public taco')
+                    transaction = await theContract.mintPublicTaco(mintAmount, {
+                        value: totalWei,
+                    });
+                } else {
+                    setErrorMessage('Something has gone wrong. Err. 13');
+                    return;
+                }
+
 
                 setIsPending(false);
                 setIsMinting(true);
@@ -81,13 +84,19 @@ export default function Minting(props: Props) {
                         6
                     )}...${walletAddress.substring(walletAddress.length - 4)}`
                 );
-                setTotalSupply((await contract.totalSupply()).toString());
+                setTotalSupply((await theContract.totalSupply()).toString());
 
             } catch (error) {
                 setIsPending(false);
-                setErrorMessage("Something went wrong with the mint (could be over max mint)");
+                // @ts-ignore
+                if(error.message.startsWith('cannot estimate') || error.message.length > 100) {
+                    setErrorMessage("Something went wrong (Did you already mint?)");
+                } else {
+                    // @ts-ignore
+                    setErrorMessage("Something went wrong.\n" + error.message);
+                }
                 console.error("I got an error!: " + error);
-                console.debug(error);
+                // console.debug(error.message);
             }
         }
     }
@@ -114,6 +123,15 @@ export default function Minting(props: Props) {
                 setConnErrMsg(`Change the network to ${projectConfig.networkName}.`);
             } else {
                 setConnErrMsg('');
+                const signer = ethersProvider?.getSigner();
+                const contract = new ethers.Contract(
+                    ContractAddress,
+                    ABI,
+                    signer
+                );
+
+                setTheContract(contract);
+
             }
         }
     }, [isConnected, chainId]);
@@ -125,18 +143,16 @@ export default function Minting(props: Props) {
     useEffect(() => {
         async function fetchTotalSupply() {
             if (!isConnected || chainId == 0 || walletAddress == "") {
+                return
+            } else if(theContract){
+
+                console.debug('fetching supply');
+                if (projectConfig.publicMintActive) {
+                    setMintPrice(projectConfig.publicMintPrice)
+                }
+                setMaxSupply(projectConfig.maxSupply.toString());
+                setTotalSupply((await theContract.totalSupply()).toString());
             }
-            const web3Provider = new ethers.providers.JsonRpcProvider(
-                rpcConfig(process.env.NEXT_PUBLIC_INFURA_KEY)
-            );
-            const contract = new ethers.Contract(
-                ContractAddress,
-                ABI,
-                web3Provider
-            );
-            console.debug('fetching supply');
-            setMaxSupply(projectConfig.maxSupply.toString());
-            setTotalSupply((await contract.totalSupply()).toString());
         }
 
         fetchTotalSupply();
@@ -146,24 +162,22 @@ export default function Minting(props: Props) {
             setTotalSupply('?');
             // clearInterval(interval);
         }
-    }, [walletAddress, isConnected, chainId]);
+    }, [walletAddress, isConnected, chainId, theContract]);
 
     useEffect(() => {
         async function fetchMintStatus() {
             if (!isConnected || chainId == 0 || walletAddress == "") {
                 return;
+            } else if(theContract) {
+                console.debug('fetching mint status');
+                let mintActive;
+                if (projectConfig.allowlistMintActive) {
+                    mintActive = await theContract.allowListSaleActive();
+                } else if (projectConfig.publicMintActive) {
+                    mintActive = await theContract.publicSaleActive();
+                }
+                setMintActive(mintActive);
             }
-            const web3Provider = new ethers.providers.JsonRpcProvider(
-                rpcConfig(process.env.NEXT_PUBLIC_INFURA_KEY)
-            );
-            const contract = new ethers.Contract(
-                ContractAddress,
-                ABI,
-                web3Provider
-            );
-            console.debug('fetching mint status');
-            const mintActive = await contract.allowListSaleActive();
-            setMintActive(mintActive);
         }
 
         fetchMintStatus();
@@ -176,7 +190,7 @@ export default function Minting(props: Props) {
             setMintActive(false);
             clearInterval(interval);
         }
-    }, [walletAddress, isConnected, chainId]);
+    }, [walletAddress, isConnected, chainId, theContract]);
 
     useEffect(() => {
         async function calculateMerkleProof() {
@@ -190,16 +204,20 @@ export default function Minting(props: Props) {
             const buf2hex = (x: Buffer) => '0x' + x.toString('hex')
             const root = buf2hex(rootHash)
             console.debug("Root Hash", root.toString())
-            console.log(walletAddress)
+            // console.log(walletAddress)
             const walletMerkleProof = merkleTree.getHexProof(keccak(walletAddress))
-            console.log(walletMerkleProof.toString())
+            // console.log(walletMerkleProof.toString())
 
 
             setMerkleProof(walletMerkleProof)
             setMerkleRoot(rootHash)
             const onList = merkleTree.verify(walletMerkleProof, keccak(walletAddress), rootHash)
             console.debug("On allowlist? ", onList)
-            setIsOnAllowlist(onList)
+            if(projectConfig.publicMintActive){
+                setIsOnAllowlist(true)
+            } else {
+                setIsOnAllowlist(onList)
+            }
         }
 
         calculateMerkleProof();
@@ -214,19 +232,9 @@ export default function Minting(props: Props) {
 
     return (
         <>
-            {/*<h2 className="text-4xl mb-4">{CollectionName}</h2>*/}
-            {/*<p>*/}
-            {/*    <a href={`https://kovan.etherscan.io/address/${ContractAddress}`} target="_blank"*/}
-            {/*       rel="noreferrer">Etherscan {ContractAddress}</a>*/}
-            {/*</p>*/}
-
             <div
                 className="bg-stone-50 rounded-lg p-8 space-y-4">
                 <h1 className="text-center">Mint your Mocko Taco!</h1>
-                {/*<div className="m-auto text-center w-56">*/}
-                {/*    {CollectionImage ? (<Image className="" src={CollectionImage} alt={CollectionName}/>) :*/}
-                {/*        <span className="text-xl">No image available</span>}*/}
-                {/*</div>*/}
                 <div className="text-4xl font-bold text-dark_choco text-center">
                     <span className="text-dark_choco">{totalSupply}</span> /{' '}
                     {maxSupply}
@@ -235,7 +243,7 @@ export default function Minting(props: Props) {
                 <div className="text-center">
                     <p className="text-xl text-dark_choco">
                         Total price: {finalMintPrice * mintAmount}{' '}
-                        {projectConfig.chainName} {priceName} (excluding gas fees)
+                        {projectConfig.chainName} {priceName} (+gas fees)
                     </p>
                 </div>
                 <div className="flex justify-center text-white">
@@ -274,7 +282,7 @@ export default function Minting(props: Props) {
                             ) : (
                                 <button
                                     type="button"
-                                    className={isMintActive ? `rounded-lg px-4 py-2 bg-choco hover:bg-dark_choco font-bold w-40` : `rounded-lg px-4 py-2 bg-choco font-bold w-40 cursor-not-allowed`}
+                                    className={isMintActive ? `rounded-lg px-4 py-2 bg-choco hover:bg-dark_choco font-bold w-40` : `rounded-lg px-4 py-2 bg-gray-300 font-bold w-40 cursor-not-allowed`}
                                     onClick={mintNFTs}
                                     disabled={!isMintActive}
                                 >
@@ -285,7 +293,7 @@ export default function Minting(props: Props) {
                     ) : (
                         <button
                             type="button"
-                            className={`rounded-lg px-4 py-2 bg-choco font-bold w-40 cursor-not-allowed`}
+                            className={`rounded-lg px-4 py-2 bg-gray-300 font-bold w-40 cursor-not-allowed`}
                             disabled={true}
                             onClick={mintNFTs}
                         >
@@ -295,7 +303,7 @@ export default function Minting(props: Props) {
                 </div>
 
                 {message && <div className="text-green-500 text-center">{message}</div>}
-                {errorMessage && <div className="text-red-500 text-center">{errorMessage}</div>}
+                {errorMessage && <div className="text-red-500 text-center whitespace-pre-line">{errorMessage}</div>}
                 {connErrMsg && (
                     <div className="text-red-500 text-center">{connErrMsg}</div>
                 )}

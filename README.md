@@ -1,3 +1,8 @@
+# Get Merkle Root
+Update `config/allowlist.json`
+Run `node generateAllowlistMerkle.js`
+Put that in the contract and redeploy
+
 # [Next.js](https://nextjs.org/) NFT Mint dApp
 
 A simple, fast and modern dApp for minting NFTs.

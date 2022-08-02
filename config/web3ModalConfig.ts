@@ -1,5 +1,6 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
+import projectConfig from "./projectConfig";
 
 export default function getProviderOptions() {
     return  {
@@ -8,7 +9,7 @@ export default function getProviderOptions() {
             options: {
                 infuraId: process.env.NEXT_PUBLIC_INFURA_KEY,
             },
-            rpc: 42,
+            rpc: projectConfig.chainId,
         }
     };
 

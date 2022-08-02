@@ -55,7 +55,7 @@ contract MockoTaco is ERC721A, Ownable, ReentrancyGuard {
      */
     event ToggleAllowlistSaleStatus(bool allowlistSaleStatus);
 
-    constructor() ERC721A("MockTest", "MTEST") {
+    constructor() ERC721A("MockoTaco", "MACKOTACO") {
     }
 
 
