@@ -2,14 +2,13 @@
 pragma solidity ^0.8.15;
 
 import "erc721a/contracts/ERC721A.sol";
-import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/interfaces/IERC721.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
+contract MockoTaco is ERC721A, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
     uint256 public constant MAX_MINT_SUPPLY = 4005;
@@ -32,27 +31,27 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     string private baseExtension;
 
     /**
-     * @dev triggered when minted
+     * @notice triggered when minted
      */
     event Minted(address minter, uint256 amount);
 
     /**
-     * @dev triggered after owner withdraws funds
+     * @notice triggered after owner withdraws funds
      */
     event Withdrawal(address to, uint amount);
 
     /**
-     * @dev triggered after the owner sets the base uri
+     * @notice triggered after the owner sets the base uri
      */
     event BaseURIChanged(string newBaseURI);
 
     /**
-     * @dev triggered after the public sale status in enabled/disabled
+     * @notice triggered after the public sale status in enabled/disabled
      */
     event TogglePublicSaleStatus(bool publicSaleStatus);
 
     /**
-     * @dev triggered after the allowlist sale status in enabled/disabled
+     * @notice triggered after the allowlist sale status in enabled/disabled
      */
     event ToggleAllowlistSaleStatus(bool allowlistSaleStatus);
 
@@ -61,42 +60,34 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
 
 
     /**
-     * @dev The function to call for allowlist minting
-     * @param quantity the number of tokens to mint (up to MAX_MINT_PER_TRANSACTION)
+     * @notice The function to call for allowlist minting
      * @param _merkleProof The merkle proof to validate on allowlist
      */
-    function mintAllowlistTaco(uint256 quantity, bytes32[] calldata _merkleProof) external payable {
+    function mintAllowlistTaco(bytes32[] calldata _merkleProof) external {
         require(
             allowListSaleActive,
             "Allowlist sale is not active"
-        );
-        require(
-            quantity <= MAX_MINT_PER_TRANSACTION,
-            "Over mint limit"
         );
         require(
             mintMerkleWalletList[msg.sender] == false,
             "You are not on the wallet list or have already minted"
         );
         require(
-            _totalMinted() + quantity <= MAX_MINT_SUPPLY,
+            _totalMinted() + 1 <= MAX_MINT_SUPPLY,
             "Max mint supply reached"
         );
 
-        require(msg.value == quantity * mintPrice, "Wrong amount of eth sent");
-
         bytes32 leaf = keccak256(abi.encodePacked(msg.sender));
-        require(MerkleProof.verify(_merkleProof, mintMerkleRoot, leaf), "Invalid Proof");
+        require(MerkleProof.verify(_merkleProof, mintMerkleRoot, leaf), "Invalid Merkle Proof");
         mintMerkleWalletList[msg.sender] = true;
 
+        _safeMint(msg.sender, 1);
 
-        _safeMint(msg.sender, quantity);
-
-        emit Minted(msg.sender, quantity);
+        emit Minted(msg.sender, 1);
     }
 
     /**
-     * @dev The function to call for public minting
+     * @notice The function to call for public minting
      * @param quantity the number of tokens to mint (up to MAX_MINT_PER_TRANSACTION)
      */
     function mintPublicTaco(uint256 quantity) external payable {
@@ -121,10 +112,10 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev The function to call for owner minting
+     * @notice The function to call for owner minting
      * @param quantity the number of tokens to mint
      */
-    function ownerTaco(uint256 quantity) external onlyOwner {
+    function mintOwnerTaco(uint256 quantity) external onlyOwner {
         require(
             _totalMinted() + quantity <= MAX_MINT_SUPPLY,
             "Max mint supply reached"
@@ -140,7 +131,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev The function to call for owner gift mints
+     * @notice The function to call for owner gift mints
      * @param to the address to send the tokens to
      * @param quantity the number of tokens to mint
      */
@@ -163,7 +154,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
 
 
     /**
-     * @dev Withdraws owner funds from the contract after the refund window
+     * @notice Withdraws owner funds from the contract after the refund window
      */
     function withdraw() external onlyOwner nonReentrant {
         uint256 balance = address(this).balance;
@@ -172,7 +163,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Gets the baseURI to be used to build a token URI
+     * @notice Gets the baseURI to be used to build a token URI
      * @return the baseURI string
      */
     function _baseURI() internal view override returns (string memory) {
@@ -184,7 +175,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Returns the token URI, taking into account reveal, sealing, and resealing
+     * @notice Returns the token URI, taking into account reveal, sealing, and resealing
      * @param tokenId The id of the token
      * @return The token URI string
      */
@@ -196,7 +187,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Change the unrevealed URI
+     * @notice Change the unrevealed URI
      * @param notRevealedURI_ The new string to be used
      */
     function setNotRevealedURI(string memory notRevealedURI_) external onlyOwner {
@@ -204,7 +195,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Change the base URI
+     * @notice Change the base URI
      * @param uri_ The new string to be used
      */
     function setBaseURI(string memory uri_) external onlyOwner {
@@ -213,7 +204,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Change the extension to be included on token URIs
+     * @notice Change the extension to be included on token URIs
      * @param extension_ The new string to be used
      */
     function setBaseExtension(string memory extension_) external onlyOwner {
@@ -221,7 +212,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Toggle the public sale status
+     * @notice Toggle the public sale status
      */
     function togglePublicSaleStatus() external onlyOwner {
         publicSaleActive = !publicSaleActive;
@@ -229,7 +220,7 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Toggle the public sale status
+     * @notice Toggle the public sale status
      */
     function toggleAllowlistSaleStatus() external onlyOwner {
         allowListSaleActive = !allowListSaleActive;
@@ -237,14 +228,14 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Change the token URI from unrevealed to revealed status
+     * @notice Change the token URI from unrevealed to revealed status
      */
     function reveal() external onlyOwner {
         revealed = true;
     }
 
     /**
-     * @dev Set the public mint price
+     * @notice Set the public mint price
      * @param newPrice The price to use for public mint
      */
     function setMintPrice(uint256 newPrice) external onlyOwner {
@@ -272,48 +263,5 @@ contract MockTest is ERC721A, ERC2981, Ownable, ReentrancyGuard {
      */
     function checkAddressOnMintMerkleWalletList(address wallet) public view returns (bool) {
         return mintMerkleWalletList[wallet];
-    }
-
-    /**
-     * @inheritdoc ERC2981
-     */
-    function supportsInterface(bytes4 interfaceId)
-    public
-    view
-    virtual
-    override(ERC2981, ERC721A)
-    returns (bool)
-    {
-        return
-        interfaceId == type(IERC721).interfaceId ||
-        interfaceId == type(IERC721Metadata).interfaceId ||
-        interfaceId == type(IERC2981).interfaceId ||
-        super.supportsInterface(interfaceId);
-    }
-
-    /**
-     * @dev Sets token royalties
-     * @param receiver recipient of the royalties
-     * @param feeNumerator percentage (using 2 decimals - 10000 = 100, 0 = 0, 1000 = 10)
-     */
-    function setDefaultRoyalty(address receiver, uint96 feeNumerator)
-    external
-    onlyOwner
-    {
-        _setDefaultRoyalty(receiver, feeNumerator);
-    }
-
-    /*
-     * @dev Sets token royalties
-     * @param tokenId the token id fir which we register the royalties
-     * @param receiver recipient of the royalties
-     * @param feeNumerator percentage (using 2 decimals - 10000 = 100, 0 = 0, 1000 = 10)
-     */
-    function setTokenRoyalty(
-        uint256 tokenId,
-        address receiver,
-        uint96 feeNumerator
-    ) external onlyOwner {
-        _setTokenRoyalty(tokenId, receiver, feeNumerator);
     }
 }

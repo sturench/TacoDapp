@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test_contract": "npx hardhat test"
+    "test_contract": "npx hardhat test",
+    "remix": "remixd -s . --remix-ide https://remix.ethereum.org"
   },
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.1.0",
