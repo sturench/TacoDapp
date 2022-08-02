@@ -31,7 +31,7 @@ const Home: NextPage = () => {
                             <div className="bg-white sm:row-span-full sm:col-start-1 sm:col-span-7 self-center p-10 min-w-content sm:w-auto w-5/6 mx-auto">
                                 <h1 className="">The Mocko Taco NFT Mint for the Greater Good</h1>
                                 <ul className="list-disc ml-6 font-semibold py-3 sm:text-sm text-xs">
-                                    <li className="pb-1">Minting Soon - TBD in August</li>
+                                    <li className="pb-1">Minting August 8th</li>
                                     <li className="pb-1">4005 randomly generated Mocko Tacos</li>
                                     <li className="pb-1">1 free Mocko Taco + gas mint per wallet</li>
                                     <li className="pb-1">Reserving 100 Mocko Tacos for Creators</li>
