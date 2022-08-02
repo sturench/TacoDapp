@@ -4,7 +4,6 @@ import {MerkleTree} from 'merkletreejs'
 
 const keccak = require('keccak256')
 
-import rpcConfig from '../config/rpcConfig';
 import projectConfig from '../config/projectConfig';
 import {useWallet} from "../context/AppContext";
 import allowlist from '../config/allowlist.json';
@@ -43,32 +42,25 @@ export default function Minting(props: Props) {
     const [isOnAllowList, setIsOnAllowlist] = useState(false);
     const [merkleProof, setMerkleProof] = useState<string[] | null>();
     const [merkleRoot, setMerkleRoot] = useState<Buffer | undefined>();
+    const [theContract, setTheContract] = useState<ethers.Contract>();
 
     async function mintNFTs() {
         setErrorMessage('');
         setMessage('');
         console.debug(web3Provider);
-        if (walletAddress && ethersProvider) {
+        if (walletAddress && ethersProvider && theContract) {
             const totalMintCost = (finalMintPrice * mintAmount).toString();
             const totalWei = ethers.utils.parseEther(totalMintCost).toBigInt();
             setMessage('');
             setIsPending(true);
             try {
-                const signer = ethersProvider?.getSigner();
-                const contract = new ethers.Contract(
-                    ContractAddress,
-                    ABI,
-                    signer
-                );
-                console.debug("the contract");
-                console.debug(contract);
                 let transaction;
                 if(projectConfig.allowlistMintActive) {
                     console.debug('minting an AL taco')
-                    transaction = await contract.mintAllowlistTaco(merkleProof);
+                    transaction = await theContract.mintAllowlistTaco(merkleProof);
                 } else if (projectConfig.publicMintActive) {
                     console.debug('minting a public taco')
-                    transaction = await contract.mintPublicTaco(mintAmount, {
+                    transaction = await theContract.mintPublicTaco(mintAmount, {
                         value: totalWei,
                     });
                 } else {
@@ -92,13 +84,19 @@ export default function Minting(props: Props) {
                         6
                     )}...${walletAddress.substring(walletAddress.length - 4)}`
                 );
-                setTotalSupply((await contract.totalSupply()).toString());
+                setTotalSupply((await theContract.totalSupply()).toString());
 
             } catch (error) {
                 setIsPending(false);
-                setErrorMessage("Something went wrong (Did you already mint?)");
+                // @ts-ignore
+                if(error.message.startsWith('cannot estimate') || error.message.length > 100) {
+                    setErrorMessage("Something went wrong (Did you already mint?)");
+                } else {
+                    // @ts-ignore
+                    setErrorMessage("Something went wrong.\n" + error.message);
+                }
                 console.error("I got an error!: " + error);
-                console.debug(error);
+                // console.debug(error.message);
             }
         }
     }
@@ -125,6 +123,15 @@ export default function Minting(props: Props) {
                 setConnErrMsg(`Change the network to ${projectConfig.networkName}.`);
             } else {
                 setConnErrMsg('');
+                const signer = ethersProvider?.getSigner();
+                const contract = new ethers.Contract(
+                    ContractAddress,
+                    ABI,
+                    signer
+                );
+
+                setTheContract(contract);
+
             }
         }
     }, [isConnected, chainId]);
@@ -136,21 +143,16 @@ export default function Minting(props: Props) {
     useEffect(() => {
         async function fetchTotalSupply() {
             if (!isConnected || chainId == 0 || walletAddress == "") {
+                return
+            } else if(theContract){
+
+                console.debug('fetching supply');
+                if (projectConfig.publicMintActive) {
+                    setMintPrice(projectConfig.publicMintPrice)
+                }
+                setMaxSupply(projectConfig.maxSupply.toString());
+                setTotalSupply((await theContract.totalSupply()).toString());
             }
-            const web3Provider = new ethers.providers.JsonRpcProvider(
-                rpcConfig(process.env.NEXT_PUBLIC_INFURA_KEY)
-            );
-            const contract = new ethers.Contract(
-                ContractAddress,
-                ABI,
-                web3Provider
-            );
-            console.debug('fetching supply');
-            if(projectConfig.publicMintActive) {
-                setMintPrice(projectConfig.publicMintPrice)
-            }
-            setMaxSupply(projectConfig.maxSupply.toString());
-            setTotalSupply((await contract.totalSupply()).toString());
         }
 
         fetchTotalSupply();
@@ -160,29 +162,22 @@ export default function Minting(props: Props) {
             setTotalSupply('?');
             // clearInterval(interval);
         }
-    }, [walletAddress, isConnected, chainId]);
+    }, [walletAddress, isConnected, chainId, theContract]);
 
     useEffect(() => {
         async function fetchMintStatus() {
             if (!isConnected || chainId == 0 || walletAddress == "") {
                 return;
+            } else if(theContract) {
+                console.debug('fetching mint status');
+                let mintActive;
+                if (projectConfig.allowlistMintActive) {
+                    mintActive = await theContract.allowListSaleActive();
+                } else if (projectConfig.publicMintActive) {
+                    mintActive = await theContract.publicSaleActive();
+                }
+                setMintActive(mintActive);
             }
-            const web3Provider = new ethers.providers.JsonRpcProvider(
-                rpcConfig(process.env.NEXT_PUBLIC_INFURA_KEY)
-            );
-            const contract = new ethers.Contract(
-                ContractAddress,
-                ABI,
-                web3Provider
-            );
-            console.debug('fetching mint status');
-            let mintActive;
-            if(projectConfig.allowlistMintActive) {
-                mintActive = await contract.allowListSaleActive();
-            } else if(projectConfig.publicMintActive) {
-                mintActive = await contract.publicSaleActive();
-            }
-            setMintActive(mintActive);
         }
 
         fetchMintStatus();
@@ -195,7 +190,7 @@ export default function Minting(props: Props) {
             setMintActive(false);
             clearInterval(interval);
         }
-    }, [walletAddress, isConnected, chainId]);
+    }, [walletAddress, isConnected, chainId, theContract]);
 
     useEffect(() => {
         async function calculateMerkleProof() {
@@ -209,9 +204,9 @@ export default function Minting(props: Props) {
             const buf2hex = (x: Buffer) => '0x' + x.toString('hex')
             const root = buf2hex(rootHash)
             console.debug("Root Hash", root.toString())
-            console.log(walletAddress)
+            // console.log(walletAddress)
             const walletMerkleProof = merkleTree.getHexProof(keccak(walletAddress))
-            console.log(walletMerkleProof.toString())
+            // console.log(walletMerkleProof.toString())
 
 
             setMerkleProof(walletMerkleProof)
@@ -308,7 +303,7 @@ export default function Minting(props: Props) {
                 </div>
 
                 {message && <div className="text-green-500 text-center">{message}</div>}
-                {errorMessage && <div className="text-red-500 text-center">{errorMessage}</div>}
+                {errorMessage && <div className="text-red-500 text-center whitespace-pre-line">{errorMessage}</div>}
                 {connErrMsg && (
                     <div className="text-red-500 text-center">{connErrMsg}</div>
                 )}

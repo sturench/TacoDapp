@@ -1,6 +1,6 @@
 const projectConfig = {
-  allowlistMintActive: true,
-  publicMintActive: false,
+  allowlistMintActive: false,
+  publicMintActive: true,
 
   allowMultiple: true, // implement if needed
 
