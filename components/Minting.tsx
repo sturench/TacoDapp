@@ -124,7 +124,6 @@ export default function Minting(props: Props) {
             } else {
                 setConnErrMsg('');
                 const signer = ethersProvider?.getSigner();
-                console.log(ContractAddress)
                 const contract = new ethers.Contract(
                     ContractAddress,
                     ABI,
