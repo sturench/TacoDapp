@@ -62,10 +62,19 @@ export default function Minting(props: Props) {
                 );
                 console.debug("the contract");
                 console.debug(contract);
-                const transaction = await contract.mintAllowlistTaco(merkleProof);
-                // const transaction = await contract.mintAllowlistTaco(mintAmount, merkleProof, {
-                //     value: totalWei,
-                // });
+                let transaction;
+                if(projectConfig.allowlistMintActive) {
+                    console.debug('minting an AL taco')
+                    transaction = await contract.mintAllowlistTaco(merkleProof);
+                } else if (projectConfig.publicMintActive) {
+                    console.debug('minting a public taco')
+                    transaction = await contract.mintPublicTaco(mintAmount, {
+                        value: totalWei,
+                    });
+                } else {
+                    setErrorMessage('Something has gone wrong. Err. 13');
+                    return;
+                }
 
 
                 setIsPending(false);
@@ -87,7 +96,7 @@ export default function Minting(props: Props) {
 
             } catch (error) {
                 setIsPending(false);
-                setErrorMessage("Something went wrong with the mint (could be over max mint)");
+                setErrorMessage("Something went wrong (Did you already mint?)");
                 console.error("I got an error!: " + error);
                 console.debug(error);
             }
@@ -137,6 +146,9 @@ export default function Minting(props: Props) {
                 web3Provider
             );
             console.debug('fetching supply');
+            if(projectConfig.publicMintActive) {
+                setMintPrice(projectConfig.publicMintPrice)
+            }
             setMaxSupply(projectConfig.maxSupply.toString());
             setTotalSupply((await contract.totalSupply()).toString());
         }
@@ -164,7 +176,12 @@ export default function Minting(props: Props) {
                 web3Provider
             );
             console.debug('fetching mint status');
-            const mintActive = await contract.allowListSaleActive();
+            let mintActive;
+            if(projectConfig.allowlistMintActive) {
+                mintActive = await contract.allowListSaleActive();
+            } else if(projectConfig.publicMintActive) {
+                mintActive = await contract.publicSaleActive();
+            }
             setMintActive(mintActive);
         }
 
@@ -201,7 +218,11 @@ export default function Minting(props: Props) {
             setMerkleRoot(rootHash)
             const onList = merkleTree.verify(walletMerkleProof, keccak(walletAddress), rootHash)
             console.debug("On allowlist? ", onList)
-            setIsOnAllowlist(onList)
+            if(projectConfig.publicMintActive){
+                setIsOnAllowlist(true)
+            } else {
+                setIsOnAllowlist(onList)
+            }
         }
 
         calculateMerkleProof();
@@ -227,7 +248,7 @@ export default function Minting(props: Props) {
                 <div className="text-center">
                     <p className="text-xl text-dark_choco">
                         Total price: {finalMintPrice * mintAmount}{' '}
-                        {projectConfig.chainName} {priceName} (+ gas fees)
+                        {projectConfig.chainName} {priceName} (+gas fees)
                     </p>
                 </div>
                 <div className="flex justify-center text-white">
@@ -266,7 +287,7 @@ export default function Minting(props: Props) {
                             ) : (
                                 <button
                                     type="button"
-                                    className={isMintActive ? `rounded-lg px-4 py-2 bg-choco hover:bg-dark_choco font-bold w-40` : `rounded-lg px-4 py-2 bg-choco font-bold w-40 cursor-not-allowed`}
+                                    className={isMintActive ? `rounded-lg px-4 py-2 bg-choco hover:bg-dark_choco font-bold w-40` : `rounded-lg px-4 py-2 bg-gray-300 font-bold w-40 cursor-not-allowed`}
                                     onClick={mintNFTs}
                                     disabled={!isMintActive}
                                 >
@@ -277,7 +298,7 @@ export default function Minting(props: Props) {
                     ) : (
                         <button
                             type="button"
-                            className={`rounded-lg px-4 py-2 bg-choco font-bold w-40 cursor-not-allowed`}
+                            className={`rounded-lg px-4 py-2 bg-gray-300 font-bold w-40 cursor-not-allowed`}
                             disabled={true}
                             onClick={mintNFTs}
                         >

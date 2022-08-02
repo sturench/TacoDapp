@@ -1,4 +1,9 @@
 const projectConfig = {
+  allowlistMintActive: true,
+  publicMintActive: false,
+
+  allowMultiple: true, // implement if needed
+
   nftName: 'Mocko Taco',
 
   nftSymbol: 'TACO',
@@ -6,6 +11,7 @@ const projectConfig = {
   maxSupply: 4005,
 
   maxMintAmountPerTxn: 1,
+  publicMintPrice: 0,
 
   //  mintCost: process.env.NODE_ENV === 'production' ? 100 : 0.01,
 
