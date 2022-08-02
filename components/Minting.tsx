@@ -62,9 +62,11 @@ export default function Minting(props: Props) {
                 );
                 console.debug("the contract");
                 console.debug(contract);
-                const transaction = await contract.mintAllowlistTaco(mintAmount, merkleProof, {
-                    value: totalWei,
-                });
+                const transaction = await contract.mintAllowlistTaco(merkleProof);
+                // const transaction = await contract.mintAllowlistTaco(mintAmount, merkleProof, {
+                //     value: totalWei,
+                // });
+
 
                 setIsPending(false);
                 setIsMinting(true);

@@ -5,7 +5,7 @@ const {addresses} = require('./config/allowlist.json')
 
 const leafNodes = addresses.map(addr => keccak(addr));
 const merkleTree = new MerkleTree(leafNodes, keccak, {sortPairs: true})
-const rootHash = merkleTree.getRoot()
+const root = merkleTree.getHexRoot()
 
 console.log('Whitelist Merkle Tree\n', merkleTree.toString());
-console.log('Root Hash:\n0x'+ rootHash.toString('hex'))
+console.log('Root Hash:\n'+ root)
