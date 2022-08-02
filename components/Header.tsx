@@ -17,9 +17,9 @@ export default function Header() {
         <div className="">
             <header className="py-4 mx-auto">
                 <div className="container mx-auto">
-                    {/*<div className="flex justify-end pr-4">*/}
-                    {/*    <ConnectButton/>*/}
-                    {/*</div>*/}
+                    <div className="flex justify-end pr-4">
+                        <ConnectButton/>
+                    </div>
                     <div className="flex justify-center  w-full p-6 mx-auto">
                         <div className="w-3/5 mx-auto ">
                             <Image src={MOCKO_LOGO_IMG} alt={projectConfig.nftName}/>
@@ -37,24 +37,24 @@ export default function Header() {
                         </div>
 
                         <div className="font-inter text-sm text-dark_choco font-black w-full">
-                            {/*<Link href={projectConfig.openseaCollectionUrl}*/}
-                            {/*      rel="noopener noreferrer"*/}
-                            {/*      target="_blank"*/}
-                            {/*>OPENSEA</Link>*/}
-                            <Link href=""
+                            <Link href={projectConfig.openseaCollectionUrl}
                                   rel="noopener noreferrer"
                                   target="_blank"
-                            >OPENSEA (Soon)</Link>
+                            >OPENSEA</Link>
+                            {/*<Link href=""*/}
+                            {/*      rel="noopener noreferrer"*/}
+                            {/*      target="_blank"*/}
+                            {/*>OPENSEA (Soon)</Link>*/}
                         </div>
                         <div className="font-inter text-sm text-dark_choco font-black w-full">
-                            <Link href=""
-                                  rel="noopener noreferrer"
-                                  target="_blank"
-                            >ETHERSCAN (Soon)</Link>
-                            {/*<a href={projectConfig.scanUrl}*/}
+                            {/*<Link href=""*/}
                             {/*      rel="noopener noreferrer"*/}
                             {/*      target="_blank"*/}
-                            {/*>ETHERSCAN</a>*/}
+                            {/*>ETHERSCAN (Soon)</Link>*/}
+                            <a href={projectConfig.scanUrl}
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                            >ETHERSCAN</a>
                         </div>
 
                     </div>

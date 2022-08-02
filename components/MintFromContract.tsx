@@ -136,7 +136,11 @@ export default function MintFromContract(props: Props) {
                     <div className="flex justify-end items-center text-white">{message}</div>
                 </div>
                 <div className="flex justify-center items-center ">
-                    <div className="text-center text-white w-3/5 text-sm">Head over to <a href={projectConfig.scanUrl} target="_blank" rel="noreferrer">Etherscan</a> ({projectConfig.contractAddress}) and look for the <span
+                    <div className="text-center text-white w-4/5 text-sm">Head over to <a href={projectConfig.scanUrl}
+                                                                                          target="_blank"
+                                                                                          rel="noreferrer">Etherscan
+                        ({projectConfig.contractAddress.substring(0, 5) + '...' + projectConfig.contractAddress.substring(projectConfig.contractAddress.length - 5, projectConfig.contractAddress.length)})
+                    </a> and look for the <span
                         className="font-extrabold">mintAllowlistTaco</span> function. Paste the value in <span
                         className="font-extrabold">_merkleProof</span> field and you are good to go!
                     </div>

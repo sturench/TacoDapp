@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default function Minting(props: Props) {
-    const {CollectionName, TokenSymbol, ContractAddress, ABI, CollectionImage} = props;
+    const {TokenSymbol, ContractAddress, ABI} = props;
     const {
         web3Provider,
         ethersProvider,
@@ -235,7 +235,7 @@ export default function Minting(props: Props) {
                 <div className="text-center">
                     <p className="text-xl text-dark_choco">
                         Total price: {finalMintPrice * mintAmount}{' '}
-                        {projectConfig.chainName} {priceName} (excluding gas fees)
+                        {projectConfig.chainName} {priceName} (+ gas fees)
                     </p>
                 </div>
                 <div className="flex justify-center text-white">
