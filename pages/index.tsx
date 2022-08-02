@@ -51,13 +51,13 @@ const Home: NextPage = () => {
                         <>
                     <div className="py-8">
                         <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}
-                                 ContractAddress={"0x8f3232571adb80fbde113274f3e9b6bf73551361"} ABI={MOCKOTACO_ABI}
+                                 ContractAddress={projectConfig.contractAddress} ABI={MOCKOTACO_ABI}
                                  CollectionImage={NCX_IMG}
                         />
                     </div>
 
                     <div className="py-8">
-                        <MintFromContract ContractAddress={"0x8f3232571adb80fbde113274f3e9b6bf73551361"}/>
+                        <MintFromContract/>
                     </div> </>) : ( <></>)}
 
                     <div className="py-8 flex sm:flex-row flex-col justify-center items-center">

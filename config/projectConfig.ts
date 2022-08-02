@@ -15,15 +15,15 @@ const projectConfig = {
 
   //  mintCost: process.env.NODE_ENV === 'production' ? 100 : 0.01,
 
-  networkName: 'Rinkeby Testnet',
-    // process.env.NODE_ENV === 'production'
-    //   ? 'Ethereum Mainnet' // 'Ethereum Mainnet'
-    //   : 'Rinkeby Testnet', // 'Kovan Testnet'
+  networkName:
+    process.env.NODE_ENV === 'production'
+      ? 'Ethereum Mainnet' // 'Ethereum Mainnet'
+      : 'Rinkeby Testnet', // 'Rinkeby Testnet'
 
   chainName: 'ETH', // 'ETH'
 
-  chainId: 4, // process.env.NODE_ENV === 'production' ? 1 : 4, // Ethereum (1), Kovan (42)
-  network: 'rinkeby',
+  chainId: process.env.NODE_ENV === 'production' ? 1 : 4, // Ethereum (1), Rinkeby (4)
+  network: process.env.NODE_ENV === 'production' ? 'mainnet' : 'rinkeby',
 
   siteUrl:
     process.env.NODE_ENV === 'production'
@@ -41,17 +41,15 @@ const projectConfig = {
       ? 'https://opensea.io/collection/mockotaco'
       : 'https://testnets.opensea.io/collection/mockotaco',
 
-  contractAddress:'0x8F3232571adB80FBDe113274F3E9B6Bf73551361',
-    // process.env.NODE_ENV === 'production'
-    //   ? 'your_mainnet_contract_address'
-    //   : '0x55f6463854bf37f8B99B5409CA039137138d27F6',
+  contractAddress:
+    process.env.NODE_ENV === 'production'
+      ? 'your_mainnet_contract_address'
+      : '0x8F3232571adB80FBDe113274F3E9B6Bf73551361',
 
-  scanUrl: 'https://rinkeby.etherscan.io/address/0x8F3232571adB80FBDe113274F3E9B6Bf73551361',
-    // process.env.NODE_ENV === 'production'
-    //   ? 'https://polygonscan.com/address/your_polygon_contract_address'
-    //   : 'https://kovan.etherscan.io/address/0x55f6463854bf37f8B99B5409CA039137138d27F6',
-  // 'https://etherscan.io/address/your_ethereum_contract_address'
-  // 'https://rinkeby.etherscan.io/address/your_rinkeby_contract_address'
+  scanUrl:
+    process.env.NODE_ENV === 'production'
+      ? 'https://etherscan.io/address/your_ethereum_contract_address'
+      : 'https://rinkeby.etherscan.io/address/0x8F3232571adB80FBDe113274F3E9B6Bf73551361',
 };
 
 export default projectConfig;

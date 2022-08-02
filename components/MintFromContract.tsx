@@ -9,12 +9,8 @@ import projectConfig from "../config/projectConfig";
 
 const {addresses} = allowlist
 
-interface Props {
-    ContractAddress: string,
-}
 
-export default function MintFromContract(props: Props) {
-    const {ContractAddress} = props;
+export default function MintFromContract() {
 
     const [message, setMessage] = useState('');
     const [merkleProof, setMerkleProof] = useState<string>("");
