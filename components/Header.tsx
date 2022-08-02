@@ -36,10 +36,10 @@ export default function Header() {
 
                         <div className="font-inter text-sm text-dark_choco font-black w-full">
                             {projectConfig.revealHeaderFooter ? (
-                                <Link href={projectConfig.openseaCollectionUrl}
+                                <a href={projectConfig.openseaCollectionUrl}
                                       rel="noopener noreferrer"
                                       target="_blank"
-                                >OPENSEA</Link>
+                                >OPENSEA</a>
                             ) : (
                                 <Link href=""
                                       rel="noopener noreferrer"

@@ -14,6 +14,7 @@ export default function MintFromContract() {
 
     const [message, setMessage] = useState('');
     const [merkleProof, setMerkleProof] = useState<string>("");
+    const [onAllowList, setonAllowList] = useState<boolean>(false);
 
     const [walletAddress, setWalletAddress] = useState<string | undefined>("")
     const [walletAddressField, setWalletAddressField] = useState<string | undefined>("")
@@ -54,13 +55,14 @@ export default function MintFromContract() {
             const buf2hex = (x: Buffer) => '0x' + x.toString('hex')
             const root = buf2hex(rootHash)
             console.debug("Root Hash", root.toString())
-            // console.log(walletAddress)
+            console.log(walletAddress)
             const walletMerkleProof = merkleTree.getHexProof(keccak(walletAddress))
-            // console.log(walletMerkleProof.toString())
+            console.log(walletMerkleProof.toString())
 
 
             setMerkleProof(walletMerkleProof.toString())
             const onList = merkleTree.verify(walletMerkleProof, keccak(walletAddress), rootHash)
+            setonAllowList(onList);
             console.debug("pasted On allowlist? ", onList)
             console.debug(merkleProof.toString().length)
         }
@@ -106,7 +108,7 @@ export default function MintFromContract() {
                             />
                         </div>
                         <div className="flex justify-center text-white">
-                            {merkleProof.length == 0 ? (
+                            {!walletAddress ? (
                                 <>
                                     <button
                                         type="button"
@@ -121,11 +123,11 @@ export default function MintFromContract() {
                                 <>
                                     <button
                                         type="button"
-                                        className="flex justify-center items-center rounded px-4 py-2 bg-white hover:bg-gray-300 active:bg-choco font-bold text-choco"
+                                        className={onAllowList ? "flex justify-center items-center rounded px-4 py-2 bg-white active:bg-choco active:text-white font-bold text-choco" : "flex justify-center items-center rounded px-4 py-2 bg-gray-300 hover:bg-gray-300 font-bold text-choco cursor-not-allowed"}
                                         onClick={copyMerkle}
-                                        disabled={false}
+                                        disabled={!onAllowList}
                                     >
-                                        Copy Merkle Proof
+                                        {onAllowList? "Copy Merkle Proof" : "Not on Allowlist"}
                                     </button>
 
                                 </>
