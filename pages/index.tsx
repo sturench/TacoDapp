@@ -8,7 +8,6 @@ import Minting from '../components/Minting';
 import MintFromContract from '../components/MintFromContract';
 import projectConfig from '../config/projectConfig';
 import MOCKOTACO_ABI from '../config/MockoTacoABI.json';
-import NCX_IMG from '../public/assets/NCX.webp';
 import MOCKO_CHARACTER from '../public/assets/mt.site.2.png';
 import SAVE_MOCKO from '../public/assets/mt.site.1.jpg';
 
@@ -52,7 +51,7 @@ const Home: NextPage = () => {
                     <div className="py-8">
                         <Minting CollectionName={"Mocko Taco"} TokenSymbol={'TACO'}
                                  ContractAddress={projectConfig.contractAddress} ABI={MOCKOTACO_ABI}
-                                 CollectionImage={NCX_IMG}
+                                 CollectionImage={null}
                         />
                     </div>
 
