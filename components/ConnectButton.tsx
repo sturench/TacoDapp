@@ -6,6 +6,7 @@ import Web3Modal from "web3modal";
 import getProviderOptions from "../config/web3ModalConfig";
 import Jazzicon, {jsNumberForAddress} from "react-jazzicon";
 import {useWallet} from "../context/AppContext";
+import projectConfig from "../config/projectConfig";
 
 export default function ConnectButton() {
     const {
@@ -29,7 +30,7 @@ export default function ConnectButton() {
 
         const newWeb3Modal = new Web3Modal({
             cacheProvider: true, // very important
-            network: "kovan",
+            network: projectConfig.network,
             providerOptions,
         });
 

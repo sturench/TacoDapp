@@ -17,6 +17,7 @@ const projectConfig = {
   chainName: 'ETH', // 'ETH'
 
   chainId: 4, // process.env.NODE_ENV === 'production' ? 1 : 4, // Ethereum (1), Kovan (42)
+  network: 'rinkeby',
 
   siteUrl:
     process.env.NODE_ENV === 'production'

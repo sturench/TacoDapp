@@ -214,19 +214,9 @@ export default function Minting(props: Props) {
 
     return (
         <>
-            {/*<h2 className="text-4xl mb-4">{CollectionName}</h2>*/}
-            {/*<p>*/}
-            {/*    <a href={`https://kovan.etherscan.io/address/${ContractAddress}`} target="_blank"*/}
-            {/*       rel="noreferrer">Etherscan {ContractAddress}</a>*/}
-            {/*</p>*/}
-
             <div
                 className="bg-stone-50 rounded-lg p-8 space-y-4">
                 <h1 className="text-center">Mint your Mocko Taco!</h1>
-                {/*<div className="m-auto text-center w-56">*/}
-                {/*    {CollectionImage ? (<Image className="" src={CollectionImage} alt={CollectionName}/>) :*/}
-                {/*        <span className="text-xl">No image available</span>}*/}
-                {/*</div>*/}
                 <div className="text-4xl font-bold text-dark_choco text-center">
                     <span className="text-dark_choco">{totalSupply}</span> /{' '}
                     {maxSupply}
