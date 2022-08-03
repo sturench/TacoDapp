@@ -45,12 +45,12 @@ const projectConfig = {
   contractAddress:
     process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
       ? 'your_mainnet_contract_address'
-      : '0x8F3232571adB80FBDe113274F3E9B6Bf73551361',
+      : '0x85C187BE7fd00a9dCe13c989FE08Ff7038E14C7d',
 
   scanUrl:
     process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
       ? 'https://etherscan.io/address/your_ethereum_contract_address'
-      : 'https://rinkeby.etherscan.io/address/0x8F3232571adB80FBDe113274F3E9B6Bf73551361',
+      : 'https://rinkeby.etherscan.io/address/0x85C187BE7fd00a9dCe13c989FE08Ff7038E14C7d',
 };
 
 export default projectConfig;

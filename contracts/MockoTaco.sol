@@ -55,7 +55,7 @@ contract MockoTaco is ERC721A, Ownable, ReentrancyGuard {
      */
     event ToggleAllowlistSaleStatus(bool allowlistSaleStatus);
 
-    constructor() ERC721A("MockoTaco", "MACKOTACO") {
+    constructor() ERC721A("MockoTaco", "MOCKOTACO") {
     }
 
 
@@ -175,15 +175,20 @@ contract MockoTaco is ERC721A, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @notice Returns the token URI, taking into account reveal, sealing, and resealing
+     * @notice Returns the token URI, taking into account reveal
      * @param tokenId The id of the token
      * @return The token URI string
      */
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         if (!_exists(tokenId)) revert URIQueryForNonexistentToken();
         string memory currentBaseURI = _baseURI();
+        if (!revealed) {
+            return bytes(currentBaseURI).length != 0 ? string(
+                abi.encodePacked(currentBaseURI)) : "";
+        } else {
         return bytes(currentBaseURI).length != 0 ? string(
             abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtension)) : "";
+        }
     }
 
     /**
