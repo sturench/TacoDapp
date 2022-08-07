@@ -1,4 +1,28 @@
 // SPDX-License-Identifier: MIT
+/*
+
+                               ,╓▄▄▄▓███████████████▓▄▄▄,
+                         ,▄▓█████████████████████████████████▄,
+                     ,▄███████████████████████▀└╙████████████████▄,
+                  ╓▓██████████████▀┌_.╙██████▀___█████████▀▀█████████▄
+                ▄████████████████▌______╙▀▀▀─____██████╙______╙████████▓
+             ,▓██████████████████________________█████_________╟██████████,
+            ▓███████████████████▀________________▀███___________╙▀▀▀╙└└╟████
+          ╓███████████⌐__╙▀▀▀▀▀'_______________________________________╫█████▄
+         ▄████████████_____________╫█████⌐______________█████▀_________████████
+        ▓█████████████_____________▐█████_______________█████▌_________╫████████
+       ▓███████▀╙█████______________▀███▀_______________╙████'__________└▀▀███▀██
+      ▐███████▌__╙▀▀▀'__▄▄___________'└_____▐█⌐_____]█⌐___└└__________▄▄_______╙█▌
+      ████████_________j█▌___________________▀██▄▄▄▓█▀________________╟█⌐_______╟█
+     ▐█▌    █▌_________╟█______________________╙╙▀╙└___________________█▌_______╙█▌
+     ▐█    ▐█▒_________██______________________________________________██________█▌
+     ╫███████████████████_████████████████████████████████████████████ ████████████
+                        ██        j█▌              █▌                 ▓█
+                        _▀█⌐      j█▌              █▌               "█▀_
+                                  j█▌,             ██,
+                                   ╙▀▀▀▀           ╙╙▀▀▀¬
+
+*/
 pragma solidity ^0.8.15;
 
 import "erc721a/contracts/ERC721A.sol";
@@ -55,7 +79,7 @@ contract MockoTaco is ERC721A, Ownable, ReentrancyGuard {
      */
     event ToggleAllowlistSaleStatus(bool allowlistSaleStatus);
 
-    constructor() ERC721A("MockoTaco", "MACKOTACO") {
+    constructor() ERC721A("Mocko Taco", "MOCKOTACO") {
     }
 
 
@@ -175,15 +199,20 @@ contract MockoTaco is ERC721A, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @notice Returns the token URI, taking into account reveal, sealing, and resealing
+     * @notice Returns the token URI, taking into account reveal
      * @param tokenId The id of the token
      * @return The token URI string
      */
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         if (!_exists(tokenId)) revert URIQueryForNonexistentToken();
         string memory currentBaseURI = _baseURI();
+        if (!revealed) {
+            return bytes(currentBaseURI).length != 0 ? string(
+                abi.encodePacked(currentBaseURI)) : "";
+        } else {
         return bytes(currentBaseURI).length != 0 ? string(
             abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtension)) : "";
+        }
     }
 
     /**
