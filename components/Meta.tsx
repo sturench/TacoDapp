@@ -8,7 +8,7 @@ type Props = {
 };
 
 const meta = {
-  description: `Help ${projectConfig.nftName} find a way to save Choco Taco!`,
+  description: `Long live the King of Frozen treats!`,
   ogImagePath: '/assets/mt 1.png',
 };
 
@@ -18,7 +18,7 @@ export default function Meta({ pageTitle }: Props) {
   const ogType = router.pathname === '/' ? 'website' : 'article';
   const ogTitle = pageTitle
     ? pageTitle
-    : `Help ${projectConfig.nftName} find a way to save Choco Taco!`;
+    : `Let’s save the Choco Taco!`;
   const ogImage = projectConfig.siteUrl + meta.ogImagePath;
 
   return (
