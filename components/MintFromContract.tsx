@@ -55,9 +55,9 @@ export default function MintFromContract() {
             const buf2hex = (x: Buffer) => '0x' + x.toString('hex')
             const root = buf2hex(rootHash)
             console.debug("Root Hash", root.toString())
-            console.log(walletAddress)
+            // console.log(walletAddress)
             const walletMerkleProof = merkleTree.getHexProof(keccak(walletAddress))
-            console.log(walletMerkleProof.toString())
+            // console.log(walletMerkleProof.toString())
 
 
             setMerkleProof(walletMerkleProof.toString())
