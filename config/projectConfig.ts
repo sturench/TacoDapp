@@ -1,6 +1,6 @@
 const projectConfig = {
-  allowlistMintActive: true,
-  publicMintActive: false,
+  allowlistMintActive: false,
+  publicMintActive: true,
   revealHeaderFooter: true,
 
   allowMultiple: false, // implement if needed
