@@ -236,7 +236,7 @@ export default function Minting(props: Props) {
         <>
             <div
                 className="bg-stone-50 rounded-lg p-8 space-y-4">
-                <h1 className="text-center">Mint your Mocko Taco!</h1>
+                <h1 className="text-center">Minted Out</h1>
                 <div className="text-4xl font-bold text-dark_choco text-center">
                     <span className="text-dark_choco">{totalSupply}</span> /{' '}
                     {maxSupply}
