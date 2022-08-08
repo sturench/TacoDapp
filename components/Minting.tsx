@@ -309,11 +309,11 @@ export default function Minting(props: Props) {
                             ) : (
                                 <button
                                     type="button"
-                                    className={isMintActive ? `rounded-lg px-4 py-2 bg-choco hover:bg-dark_choco font-bold w-40` : `rounded-lg px-4 py-2 bg-gray-300 font-bold w-40 cursor-not-allowed`}
+                                    className={isMintActive ? `rounded-lg px-4 py-2 bg-gray-300 hover:bg-dark_choco font-bold w-40 cursor-not-allowed` : `rounded-lg px-4 py-2 bg-gray-300 font-bold w-40 cursor-not-allowed`}
                                     onClick={mintNFTs}
-                                    disabled={!isMintActive}
+                                    disabled={false}
                                 >
-                                    {isMintActive ? (isOnAllowList ? "Mint" : "Not on allowlist") : "Mint Not Active"}
+                                    {isMintActive ? (isOnAllowList ? "Minted Out" : "Not on allowlist") : "Mint Not Active"}
                                 </button>
                             )}
                         </>
