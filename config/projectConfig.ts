@@ -1,6 +1,6 @@
 const projectConfig = {
-  allowlistMintActive: true,
-  publicMintActive: false,
+  allowlistMintActive: false,
+  publicMintActive: true,
   revealHeaderFooter: true,
 
   allowMultiple: false, // implement if needed
@@ -11,7 +11,7 @@ const projectConfig = {
 
   maxSupply: 4005,
 
-  maxMintAmountPerTxn: 1,
+  maxMintAmountPerTxn: 3,
   publicMintPrice: 0,
 
   //  mintCost: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? 100 : 0.01,
