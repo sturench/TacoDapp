@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react';
 import {ethers} from 'ethers';
 import {MerkleTree} from 'merkletreejs'
+import {IconContext} from 'react-icons';
+import {FaMinusCircle, FaPlusCircle} from 'react-icons/fa';
 
 const keccak = require('keccak256')
 
@@ -245,6 +247,31 @@ export default function Minting(props: Props) {
                         Total price: {finalMintPrice * mintAmount}{' '}
                         {projectConfig.chainName} {priceName} (+gas fees)
                     </p>
+                </div>
+                <div className="flex justify-center items-center space-x-4">
+                    <IconContext.Provider value={{size: '1.5em'}}>
+                        <button
+                            type="button"
+                            className={mintAmount <= 1 ? 'text-gray-500 cursor-default' : ''}
+                            onClick={decrementMintAmount}
+                            disabled={false}
+                        >
+                            <FaMinusCircle/>
+                        </button>
+                        <span className="text-xl">{mintAmount}</span>
+                        <button
+                            type="button"
+                            className={
+                                mintAmount >= projectConfig.maxMintAmountPerTxn
+                                    ? 'text-gray-500 cursor-default'
+                                    : ''
+                            }
+                            onClick={incrementMintAmount}
+                            disabled={false}
+                        >
+                            <FaPlusCircle/>
+                        </button>
+                    </IconContext.Provider>
                 </div>
                 <div className="flex justify-center text-white">
                     {isConnected && !connErrMsg ? (
